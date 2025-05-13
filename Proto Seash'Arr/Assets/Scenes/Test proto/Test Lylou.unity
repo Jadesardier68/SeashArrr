@@ -460,6 +460,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 929deeca78d52a34f850a081533d24d8, type: 3}
   m_PrefabInstance: {fileID: 254662423}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &267286560
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 412.01303
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 143
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -953.542
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.12965663
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.12965663
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6951181
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.6951181
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -518.869
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6efa13aec2ac0934abc6105d09e764ad, type: 2}
+    - target: {fileID: 919132149155446097, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
+      propertyPath: m_Name
+      value: M3D_Atelier_Canon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 68ac69f6192ea3347a7df74da9dc35b2, type: 3}
 --- !u!1 &296413360 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: 929deeca78d52a34f850a081533d24d8, type: 3}
@@ -2730,9 +2791,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatsManager: {fileID: 4359715218010467453}
-  AtelierManager: {fileID: 2068031864871419638, guid: c7fd55c25ca65cf4bb3a4216db62a525, type: 3}
-  tempsAvantInteraction: 1
-  tempsApresInteraction: 3
+  tempsAction: 0
+  timer: 0
+  isBusy: 0
+  refreshRate: 2
 --- !u!222 &2820318890678403613
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3117,17 +3179,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TempsNavigation: 0
+  TempsCombat: 0
   TempsFight: 0
-  TempsMinNavigation: 30
-  TempsMaxNavigation: 40
+  TempsMinBeforeFight: 50
+  TempsMaxBeforeFight: 75
+  TempsBeforeIsland: 90
   TimerFightCooldown: 5
+  TimerRessourcesCooldown: 5
   LancementFight: 0
   LancementNavig: 10
+  Carte: 1
   Navigation: 1
   Fight: 0
+  Ressources: 0
   CameraFight: {fileID: 4698288069239188497}
   CameraNavigation: {fileID: 6933764799586937339}
   UIPopUpEnnemies: {fileID: 811162128552143284}
+  UIPopUpRessources: {fileID: 0}
+  carte: {fileID: 0}
+  UI: {fileID: 0}
+  slider: {fileID: 0}
+  sliderNavigation: {fileID: 0}
+  battleHandler: {fileID: 0}
   boatHealth: 300
   canonHealth: 100
   nbrWood: 100
@@ -3137,11 +3210,20 @@ MonoBehaviour:
   nbrRagout: 0
   boatMaxHealth: 300
   canonMaxHealth: 100
+  boatHealthText: {fileID: 0}
+  canonHealthText: {fileID: 0}
   nbrWoodText: {fileID: 3321659487665499101}
   nbrIronText: {fileID: 3218963610288131808}
   nbrFoodText: {fileID: 6160297814641879481}
   nbrRhumText: {fileID: 7605544719461919172}
   nbrRagoutText: {fileID: 4775772842755969295}
+  Boat: {fileID: 0}
+  Calmar: {fileID: 0}
+  Espidoche: {fileID: 0}
+  Scylla: {fileID: 0}
+  Sil: {fileID: 0}
+  Ahuizotl: {fileID: 0}
+  useAtelier: {fileID: 0}
 --- !u!1 &4565389069196022936
 GameObject:
   m_ObjectHideFlags: 0
@@ -4237,3 +4319,4 @@ SceneRoots:
   - {fileID: 1387545538}
   - {fileID: 964875620}
   - {fileID: 244968282}
+  - {fileID: 267286560}
