@@ -3723,7 +3723,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: deb06542809bab64687d40435fcaca4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d3f9f64b4655a74793fb8307c2d30bc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4468,7 +4468,7 @@ RectTransform:
   m_GameObject: {fileID: 380703582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.274, y: 1.274, z: 1.274}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1190524346}
@@ -4491,15 +4491,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8301887, g: 0.49943018, b: 0.30153078, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6971cc538d9e0bb4ca624ab46b9a60d8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5603,6 +5603,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4620075871893336965, guid: 8929b586768bab54b91281a8fe2d0896, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c276154ca53e9544e9af866ce6f4e976, type: 2}
     - target: {fileID: -4620075871893336965, guid: 8929b586768bab54b91281a8fe2d0896, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -6996,6 +7000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 663157790}
   - component: {fileID: 663157789}
+  - component: {fileID: 663157791}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -7080,6 +7085,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &663157791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663157788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &693483965
 GameObject:
   m_ObjectHideFlags: 0
@@ -9116,7 +9144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8340154e0ea1d6848aacfa8f03dd76d3, type: 2}
+  - {fileID: 2100000, guid: 4cfcaa752cba4fb4bb8910261ce4a490, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14052,6 +14080,7 @@ MonoBehaviour:
   ordrePanel: {fileID: 1971557460}
   targetPanel: {fileID: 0}
   choicePanel: {fileID: 502488179}
+  slidersVie: []
   listPictures:
   - {fileID: 57727527}
   - {fileID: 1957163234}

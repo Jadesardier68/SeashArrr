@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1468914928573571945}
   - component: {fileID: 246301182925246610}
   - component: {fileID: 8463842772823726020}
+  - component: {fileID: -7449185244619806289}
   m_Layer: 0
   m_Name: Axolotl
   m_TagString: Enemy
@@ -106,6 +107,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7449185244619806289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767791351644824231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afa106d9b1f14e46b95525c2a9028d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPMax: 75
+  ATT: 25
+  CanonBoatATT: 0
+  AllATT: 0
+  HealPower: 0
+  BoostPower: 0
+  type: 0
 --- !u!1 &5023786134678782798
 GameObject:
   m_ObjectHideFlags: 0

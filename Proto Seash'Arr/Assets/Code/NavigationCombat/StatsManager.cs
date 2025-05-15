@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using static Player;
 
 public class StatsManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class StatsManager : MonoBehaviour
     public int TempsBeforeIsland = 90;
     public float TimerFightCooldown = 5;
     public float TimerRessourcesCooldown = 5;
+    public float TimerTotal;
 
     [Header("Temps avant le switch de camera")]
     public int LancementFight;
@@ -113,6 +115,8 @@ public class StatsManager : MonoBehaviour
 
     private Dictionary<string, Button> islandButtons;
 
+    public UIManager UIManager;
+
 void Start()
     {
         carte.SetActive(true);
@@ -161,6 +165,7 @@ void Start()
 
         if (Navigation)
         {
+            TimerTotal += Time.deltaTime;
             TempsNavigation += Time.deltaTime;
             TempsCombat += Time.deltaTime;
             slider.value = TempsNavigation;
@@ -176,10 +181,12 @@ void Start()
                 CameraFight.SetActive(true);
                 slider.value = TempsNavigation;
                 TempsNavigation = TempsNavigation;
+                TimerTotal = TimerTotal;
                 UIPopUpEnnemies.SetActive(false);
                 sliderNavigation.SetActive(false);
                 LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
                 TempsCombat = 0;
+                UIManager.ordrePanel.SetActive(true);
             }
 
             if (TempsNavigation >= TempsBeforeIsland - TimerRessourcesCooldown)
@@ -196,6 +203,7 @@ void Start()
 
                 if (ancreActives == 2)
                 {
+          
                     useAtelier.AnnulerAction();
                     Navigation = false;
                     Ressources = true;
@@ -230,6 +238,7 @@ void Start()
         {
             TempsNavigation = 0;
             TempsCombat += Time.deltaTime;
+            TimerTotal += Time.deltaTime;
 
             // Obtention des ressources en fonction de l'île
             if (islandResources.ContainsKey(currentIsland))

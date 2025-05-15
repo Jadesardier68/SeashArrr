@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 1289053687400059535}
   - component: {fileID: 700839604400548355}
   - component: {fileID: 4369986137305187596}
+  - component: {fileID: -3849958533071781376}
   m_Layer: 0
   m_Name: Meduse
   m_TagString: Enemy
@@ -208,6 +209,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3849958533071781376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770142117679388419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afa106d9b1f14e46b95525c2a9028d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPMax: 75
+  ATT: 0
+  CanonBoatATT: 0
+  AllATT: 10
+  HealPower: 0
+  BoostPower: 0
+  type: 3
 --- !u!1 &9014262346646048220
 GameObject:
   m_ObjectHideFlags: 0

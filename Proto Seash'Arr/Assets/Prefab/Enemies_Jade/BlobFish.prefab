@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 5331550404360757830}
   - component: {fileID: 3118478100833117330}
   - component: {fileID: 5613642433431593125}
+  - component: {fileID: -7532452510316596986}
   m_Layer: 0
   m_Name: BlobFish
   m_TagString: Enemy
@@ -208,6 +209,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7532452510316596986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514435952787283655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afa106d9b1f14e46b95525c2a9028d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPMax: 100
+  ATT: 10
+  CanonBoatATT: 0
+  AllATT: 0
+  HealPower: 20
+  BoostPower: 15
+  type: 2
 --- !u!1 &6096182815686055790
 GameObject:
   m_ObjectHideFlags: 0

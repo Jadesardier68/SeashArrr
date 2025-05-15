@@ -375,6 +375,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d2b7122a86c8f43bf0271f787dbd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atelierManager: {fileID: 0}
+  CuisinerRagout:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1bdda5cf-a00c-4bef-af83-99348533f6fb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CuisinerRhum:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d10db27a-f7e9-4957-9289-d8c16d170824
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Manger:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a27a12e6-484f-43b5-ac2d-269a6f8bd48d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  RepCanon:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c2cc17b4-f11a-4d2d-8dba-fec6b3de4c90
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AmeBateau:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 01fe65ed-fb9b-4959-a72c-67ecd9726d3f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AmeCanon:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b411cff2-6f1a-4793-9e39-5e900b799baf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &120360514453912282
 GameObject:
   m_ObjectHideFlags: 0
@@ -7837,6 +7892,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d2b7122a86c8f43bf0271f787dbd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atelierManager: {fileID: 0}
+  CuisinerRagout:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 62bf70f4-4785-4350-9b55-80651b232c50
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CuisinerRhum:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 68ca7bc9-47bc-4ae9-b835-9551bf204512
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Manger:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 13accee9-f5d0-431a-b00c-9ab1dc30bdec
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  RepCanon:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6c634b70-0fb9-4b32-b69b-6182a9f904c9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AmeBateau:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dcf2a4f6-7bd4-41cd-ae2f-01b92b369f9c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AmeCanon:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1b12879f-b3c1-47f3-8404-12a332b15032
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &7139021188211854803
 GameObject:
   m_ObjectHideFlags: 0
@@ -8625,11 +8735,62 @@ MonoBehaviour:
   PanelTableIngenieur: {fileID: 2118896423613035875}
   PanelPiqueNique: {fileID: 3193929890722135309}
   PanelCanon: {fileID: 8259120162037092993}
+  PanelAncre: {fileID: 0}
+  CuisineSlider: {fileID: 0}
+  IngeniorSlider: {fileID: 0}
+  PiqueNiqueSlider: {fileID: 0}
+  CanonSlider: {fileID: 0}
   cuisineActive: 0
   tableIngenieurActive: 0
   canonActive: 0
   piqueNiqueActive: 0
+  ancreActive: 0
   inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
+  InteractKitchen:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 398909eb-010c-4e1a-a88d-5233aaa793c6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4bbb219a-0110-4f41-a73d-eb10c7b7746b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  IngeniorToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 99828795-5a3c-435b-9fca-dbac7e75012d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  PiqueNiqueToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3672fe2f-2342-4f64-b201-4496d2d219e9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AncreToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 582a2aef-d647-46bb-9f7e-c5e22dbbd5c5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &7818337187715275130
 GameObject:
   m_ObjectHideFlags: 0
@@ -9826,30 +9987,6 @@ MonoBehaviour:
     m_ActionName: GameplayNavigation/InteractIngenior[/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 4f3e1458-6446-48d2-a4ce-87a572a0ab1f
-    m_ActionName: CharacterChoice/ValiderCap
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8f02757d-92ab-47ce-a14e-d4de7e0d0c01
-    m_ActionName: CharacterChoice/Annuler
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 70b0f449-7df3-47a1-88b2-53a1ed472513
-    m_ActionName: CharacterChoice/Valider2
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ace6184f-8c3c-45b7-8245-e9ac8af70bd2
-    m_ActionName: CharacterChoice/Valider3
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6d239d96-c8be-4a96-a3e8-bce9152b056f
-    m_ActionName: CharacterChoice/ValiderJouer
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: be3e8ace-2e98-4ea7-ae6e-61e70d878978
-    m_ActionName: MenuPrincipal/Jouer
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 50d8c247-7dcc-40bb-aa0c-15a84ab464c4
     m_ActionName: Cuisine/CuisinerRagout[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
@@ -9874,24 +10011,28 @@ MonoBehaviour:
     m_ActionName: Ingenior/AmeCanon[/XInputControllerWindows/buttonWest]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 1ee90518-5156-4f84-a5de-6716b5312f3b
+    m_ActionId: 2d98e412-a4d7-4039-9a83-62b144bb1850
     m_ActionName: CharacterChoice/Left[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: e82ec69a-989f-4ab2-ab15-38edbdce56dc
+    m_ActionId: 77de6216-5287-4932-b06f-5a19d2e2226b
     m_ActionName: CharacterChoice/Right[/XInputControllerWindows/rightTrigger]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: d4189bdb-4bc1-41af-9840-f947eea51cd0
-    m_ActionName: "MenuPrincipal/Cr\xE9dits[/XInputControllerWindows/buttonEast]"
+    m_ActionId: 028552dd-14cf-4ff0-a0ce-77c19cd7ee2c
+    m_ActionName: CharacterChoice/Valider[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c828e635-97e6-4e22-8a55-0832407328e8
-    m_ActionName: MenuPrincipal/Tuto[/XInputControllerWindows/buttonNorth]
+    m_ActionId: a548bdf6-e7d2-4ac0-bc7a-78a1b0bb3d66
+    m_ActionName: CharacterChoice/Annuler[/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 14827c9f-ebb3-47f1-9e50-6cafc6552370
-    m_ActionName: "MenuPrincipal/Param\xE8tres[/XInputControllerWindows/buttonWest]"
+    m_ActionId: e1c08d01-7443-444e-b734-0e58e9016200
+    m_ActionName: CharacterChoice/ValiderFinal[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58a35a5e-2152-4515-953d-ed09260dc7d2
+    m_ActionName: Parameters/Retour[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameplayNavigation
@@ -9950,6 +10091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3efd2de4cb6294288783e4b40ad184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIBattle: {fileID: 0}
+  UIBattleItems: {fileID: 0}
+  UIBattleFix: {fileID: 0}
   HPMax: 100
   ATT: 0
   CanonPower: 0
@@ -9957,9 +10101,92 @@ MonoBehaviour:
   BoostPower: 0
   FixPower: 0
   UIManager: {fileID: 0}
+  statsManager: {fileID: 0}
+  battleHandler: {fileID: 0}
   role: 0
   CaptainPrefab: {fileID: 8675310550896121796}
   DoctorPrefab: {fileID: 7745219684697470710}
+  AttackInput:
+    m_Name: Attack Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b061cf0c-8a14-4c5e-9b28-8f8559e62e38
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  HealInput:
+    m_Name: Heal Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 283f7a5d-7984-4f84-9145-35482328f2f6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  BoostInput:
+    m_Name: Boost Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 06142655-b587-4ee1-a0af-b3a0206a74b2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonInput:
+    m_Name: Canon Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a60e1d25-c0e6-4775-8db1-e77a71d6f8fd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  FixInput:
+    m_Name: Fix Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ddaf981c-9f13-4941-a7c7-15d3a0db4127
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  ItemInput:
+    m_Name: Item Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 64b54693-4689-4399-ab85-77c14e3da1cd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonFixInput:
+    m_Name: Canon Fix Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1a99e40f-6594-4ade-a828-9dc8b2c105b8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  BoatFixInput:
+    m_Name: Boat Fix Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 56b8becc-fba5-451a-b885-d213963e6db8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Annuler:
+    m_Name: Annuler
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 67c8adef-8bbe-4d96-9887-174ecc58acac
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &8675310550896121796
 GameObject:
   m_ObjectHideFlags: 0
@@ -10116,11 +10343,62 @@ MonoBehaviour:
   PanelTableIngenieur: {fileID: 4026864554333129184}
   PanelPiqueNique: {fileID: 5660370227076997952}
   PanelCanon: {fileID: 7455620351612289237}
+  PanelAncre: {fileID: 0}
+  CuisineSlider: {fileID: 0}
+  IngeniorSlider: {fileID: 0}
+  PiqueNiqueSlider: {fileID: 0}
+  CanonSlider: {fileID: 0}
   cuisineActive: 0
   tableIngenieurActive: 0
   canonActive: 0
   piqueNiqueActive: 0
+  ancreActive: 0
   inputActionAsset: {fileID: -944628639613478452, guid: 2aad10668ca56d441b8224b6bd0a05dd, type: 3}
+  InteractKitchen:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bc0a5667-7503-4636-932c-5674ea3ebfad
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9fd54799-6339-4b6e-9894-afbce362e219
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  IngeniorToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 31809e36-4754-4cb0-bc06-e888028913cc
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  PiqueNiqueToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b91d47e6-f9e0-4cf3-bffc-e42c14373f1b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AncreToggle:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b30c2231-505c-4eb8-bd91-b9425fa44472
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &8968446856689318024
 GameObject:
   m_ObjectHideFlags: 0

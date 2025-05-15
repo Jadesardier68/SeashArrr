@@ -12943,6 +12943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3efd2de4cb6294288783e4b40ad184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIBattle: {fileID: 0}
+  UIBattleItems: {fileID: 0}
+  UIBattleFix: {fileID: 0}
   HPMax: 100
   ATT: 0
   CanonPower: 0
@@ -13005,6 +13008,33 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 1ded23da-a022-4261-a7af-e58e9f3150fa
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonFixInput:
+    m_Name: Canon Fix Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8d3b3aaa-1789-433b-a59b-a29af7c7b86f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  BoatFixInput:
+    m_Name: Boat Fix Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a73f4880-a3a0-4ea7-874e-4a43844ae3a0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Annuler:
+    m_Name: Annuler
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8bfb1cca-cfcb-4fa5-8192-766994440a0b
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

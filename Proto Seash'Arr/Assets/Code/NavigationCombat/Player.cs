@@ -34,24 +34,29 @@ public class Player : MonoBehaviour
     public Battle_Handler battleHandler;
     
 
-    private bool isBoosted;
+    public bool isBoosted;
     public Role role;
     public GameObject CaptainPrefab;
     public GameObject DoctorPrefab;
 
-    private int HP { get; set; }
+    public int HP;
 
     public InputAction AttackInput;
     public InputAction HealInput;
-    public InputAction BoostInput;
+   // public InputAction BoostInput;
     public InputAction CanonInput;
-    public InputAction FixInput;
-    public InputAction ItemInput;
-    public InputAction CanonFixInput;
+    //public InputAction FixInput;
+   // public InputAction ItemInput;
+   // public InputAction CanonFixInput;
     public InputAction BoatFixInput;
-    public InputAction Annuler;
+    //public InputAction Annuler;
 
     private int currentTargetIndex;
+
+    public class PlayerInfo : MonoBehaviour
+    {
+        public int playerId;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -129,54 +134,46 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+
     public IEnumerator Action()
     {
-       /* AttackInput.Enable();
-        AttackInput.performed += OnAttack;
+        EnableInputs();
 
+        bool done = false;
+        int action = -1;
+        int target = -1;
+
+        yield return StartCoroutine(UIManager.Starter(this, (a, t) =>
+        {
+            action = a;
+            target = t;
+            done = true;
+        }));
+
+        yield return new WaitUntil(() => done);
+
+        currentTargetIndex = target;
+
+        Debug.Log(action + "," + target);
+        switch (action)
+        {
+            case 0: OnAttack(new InputAction.CallbackContext()); break;
+            case 1: OnHeal(new InputAction.CallbackContext()); break;
+            case 2: OnCanon(new InputAction.CallbackContext()); break;
+            case 3: OnBoatFix(new InputAction.CallbackContext()); break;
+        }
+    }
+
+    private void EnableInputs()
+    {
+        AttackInput.Enable();
+        AttackInput.performed += OnAttack;
         HealInput.Enable();
         HealInput.performed += OnHeal;
-
-        BoostInput.Enable();
-        BoostInput.performed += OnBoost;
-
         CanonInput.Enable();
         CanonInput.performed += OnCanon;
-
-        FixInput.Enable();
-        FixInput.performed += OnFix;
-
-        ItemInput.Enable();
-        ItemInput.performed += OnItem;
-
-        CanonFixInput.Enable();
-        CanonFixInput.performed += OnCanonFix;
-
         BoatFixInput.Enable();
         BoatFixInput.performed += OnBoatFix;
-
-        Annuler.Enable();
-        Annuler.performed += OnCancel;*/
-
-        if (statsManager.Fight == true)
-        {
-            (int, int) choice = UIManager.Starter(this);
-            int action = choice.Item1;
-            int target = choice.Item2;
-
-            Debug.Log(action + "," + target);
-            switch (action)
-            {
-                case 0: OnAttack(new InputAction.CallbackContext()); break;
-                case 1: OnCanon(new InputAction.CallbackContext()); break;
-                case 2: OnFix(new InputAction.CallbackContext()); break;
-                case 3: OnItem(new InputAction.CallbackContext()); break;
-            }
-
-            yield return null;
-            battleHandler.isTurnOver = true;
-        }
     }
 
 
@@ -270,13 +267,13 @@ public class Player : MonoBehaviour
     {
         AttackInput.performed -= OnAttack;
         HealInput.performed -= OnHeal;
-        BoostInput.performed -= OnBoost;
+       // BoostInput.performed -= OnBoost;
         CanonInput.performed -= OnCanon;
-        FixInput.performed -= OnFix;
-        ItemInput.performed -= OnItem;
-        CanonFixInput.performed -= OnCanonFix;
+       // FixInput.performed -= OnFix;
+       // ItemInput.performed -= OnItem;
+        //CanonFixInput.performed -= OnCanonFix;
         BoatFixInput.performed -= OnBoatFix;
-        Annuler.performed -= OnCancel;
+       // Annuler.performed -= OnCancel;
 
 }
 

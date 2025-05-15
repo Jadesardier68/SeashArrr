@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,8 @@ public class UIManager : MonoBehaviour
 {
     public GameObject ordrePanel;
     public GameObject targetPanel;
+    public GameObject choicePanel;
+    public Slider[] slidersVie;
 
     public GameObject[] listPictures;
 
@@ -23,29 +26,33 @@ public class UIManager : MonoBehaviour
     private Player currentPlayer;
     public Battle_Handler battleHandler;
 
-    public (int, int) Starter(Player player)
+    public void Start()
     {
+        
+    }
+    public IEnumerator Starter(Player player, Action<int, int> onChoiceComplete)
+    {
+        ordrePanel.SetActive(true);
         currentPlayer = player;
         selectedAction = -1;
         selectedTarget = -1;
         actionChosen = false;
         targetChosen = false;
 
-        StartCoroutine(ActionSelection());
-        while (!targetChosen)
-        {
-            // Wait until both action and target are chosen
-        }
+        yield return StartCoroutine(ActionSelection());
 
-        return (selectedAction, selectedTarget);
+        // Appeler le callback avec le choix final
+        onChoiceComplete?.Invoke(selectedAction, selectedTarget);
     }
 
     private IEnumerator ActionSelection()
     {
         ordrePanel.SetActive(true);
-        targetPanel.SetActive(false);
 
-        listPictures.AddRange(battleHandler.turnOrder);
+        choicePanel.SetActive(true);
+        //targetPanel.SetActive(false);
+
+       // listPictures.AddRange(battleHandler.turnOrder);
     
         // Wait for action to be selected
         yield return new WaitUntil(() => actionChosen);

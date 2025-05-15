@@ -7,6 +7,7 @@ public class Battle_Handler : MonoBehaviour
 {
     public List<GameObject> Players = new List<GameObject>();
     public List<GameObject> Ennemies = new List<GameObject>();
+    public GameObject[] BanqueEnnemies;
     public List<GameObject> turnOrder = new List<GameObject>();
     private int currentTurnIndex = 0;
     public bool isBattleOver = false;
@@ -33,11 +34,12 @@ public class Battle_Handler : MonoBehaviour
 
     public void OnFightBegin()
     {
-        Players.Clear(); // Optionnel : au cas où tu veux réinitialiser
+        Players.Clear();
         Ennemies.Clear();
 
         Players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        Ennemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+
+        GenerateEnemies();
 
         BuildTurnOrder();
         StartCoroutine(BattleLoop());
@@ -62,13 +64,39 @@ public class Battle_Handler : MonoBehaviour
         }
     }
 
+    private void GenerateEnemies()
+    {
+        int enemyCount;
+
+        if (statsManager.TimerTotal < 300) 
+            enemyCount = 3;
+        else if (statsManager.TimerTotal < 600) 
+            enemyCount = 4;
+        else
+            enemyCount = 5;
+
+        HashSet<int> selectedIndices = new HashSet<int>();
+
+        while (Ennemies.Count < enemyCount && Ennemies.Count < BanqueEnnemies.Length)
+        {
+            int index = Random.Range(0, BanqueEnnemies.Length);
+            if (!selectedIndices.Contains(index))
+            {
+                GameObject enemyInstance = Instantiate(BanqueEnnemies[index]);
+                enemyInstance.tag = "Enemy";
+                Ennemies.Add(enemyInstance);
+                selectedIndices.Add(index);
+            }
+        }
+    }
+
     private IEnumerator BattleLoop()
     {
-        yield return new WaitForSeconds(1f); // Small delay before starting
+        yield return new WaitForSeconds(2f); 
 
         while (!isBattleOver)
         {
-            if (Players.Count == 0 || Ennemies.Count == 0)
+            if (Ennemies.Count == 0)
             {
                 Debug.Log("Battle Over!");
                 isBattleOver = true;
@@ -77,7 +105,15 @@ public class Battle_Handler : MonoBehaviour
 
             }
 
+            else if (statsManager.boatHealth <= 0)
+            {
+                Debug.Log("Battle Over!");
+                isBattleOver = true;
+                fightStarted = false;
+                yield break;
+            }
             GameObject currentUnit = turnOrder[currentTurnIndex];
+            Debug.Log(turnOrder[currentTurnIndex] + "joue");
             isTurnOver = false;
 
             if (currentUnit.CompareTag("Player"))
@@ -111,13 +147,13 @@ public class Battle_Handler : MonoBehaviour
 
             currentTurnIndex = (currentTurnIndex + 1) % turnOrder.Count;
 
-            yield return new WaitForSeconds(0.5f); // Turn delay
+            yield return new WaitForSeconds(1f); 
         }
     }
 
     private IEnumerator EnemyTurn(Enemy enemy)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(5f);
 
         switch (enemy.type)
         {
@@ -130,8 +166,11 @@ public class Battle_Handler : MonoBehaviour
                 break;
 
             case Enemy.Type.Healer:
-                enemy.Heal();
-                enemy.Boost();
+                int choice = Random.Range(0, 3);
+                if (choice == 0) enemy.Heal();
+                else if (choice == 1) enemy.Boost();
+               // else enemy.Attack();
+
                 break;
 
             case Enemy.Type.AOE:
@@ -139,7 +178,7 @@ public class Battle_Handler : MonoBehaviour
                 break;
 
             case Enemy.Type.Boss:
-                int choice = Random.Range(0, 3);
+                choice = Random.Range(0, 3);
                 if (choice == 0) enemy.AllAttack();
                 else if (choice == 1) enemy.CanonBoatAttack();
                 else enemy.Attack();

@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 8737801936535294702}
   - component: {fileID: 1692246700194205003}
   m_Layer: 0
-  m_Name: PlayerManager (1)
+  m_Name: ManagerPlayerChoiceUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,6 +312,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 77de6216-5287-4932-b06f-5a19d2e2226b
     m_ActionName: CharacterChoice/Right[/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 028552dd-14cf-4ff0-a0ce-77c19cd7ee2c
+    m_ActionName: CharacterChoice/Valider[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a548bdf6-e7d2-4ac0-bc7a-78a1b0bb3d66
+    m_ActionName: CharacterChoice/Annuler[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e1c08d01-7443-444e-b734-0e58e9016200
+    m_ActionName: CharacterChoice/ValiderFinal[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58a35a5e-2152-4515-953d-ed09260dc7d2
+    m_ActionName: Parameters/Retour[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterChoice
@@ -558,7 +574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8ed0eae13f483bf46b3bf53b4f2723af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bad8f5bebd260db47889ba5c21163985, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -633,7 +649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d85d1fb6daa30464f8aaec5e68b098bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 17e5b2b4a2db8d1439beefb479cf8032, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1126,7 +1142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f6104e6fcbeb3c647922e96c1561e780, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0d4d2bdddf6b1b4992f88aee282c37d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1317,7 +1333,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1623ef338f0e60a4fb37eacdc9c16d7a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63fafbd38b029a645b202940e6dac981, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

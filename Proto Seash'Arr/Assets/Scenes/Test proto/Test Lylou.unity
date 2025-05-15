@@ -670,7 +670,7 @@ Transform:
   m_GameObject: {fileID: 4698288069239188497}
   serializedVersion: 2
   m_LocalRotation: {x: 0.14617985, y: -0.3933732, z: 0.059117984, w: 0.90575606}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.95, y: 13.95, z: -3.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1256,6 +1256,7 @@ MonoBehaviour:
   TempsBeforeIsland: 90
   TimerFightCooldown: 5
   TimerRessourcesCooldown: 5
+  TimerTotal: 0
   LancementFight: 0
   LancementNavig: 10
   Carte: 1
@@ -1294,6 +1295,7 @@ MonoBehaviour:
   Sil: {fileID: 0}
   Ahuizotl: {fileID: 0}
   useAtelier: {fileID: 0}
+  UIManager: {fileID: 0}
 --- !u!1 &4565389069196022936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,13 +2252,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6933764799586937339}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29486382, y: -0.05616089, z: 0.017363219, w: 0.95372945}
-  m_LocalPosition: {x: -5.6, y: 15.33, z: -13.29}
+  m_LocalRotation: {x: 0.39742923, y: -0.088344686, z: 0.060168594, w: 0.91138625}
+  m_LocalPosition: {x: -5.8509216, y: 19.999771, z: -12.760315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8900263476189097319}
-  m_LocalEulerAnglesHint: {x: 34.36, y: -6.74, z: 0}
+  m_LocalEulerAnglesHint: {x: 47.312, y: -9.612, z: 3.336}
 --- !u!222 &8681580574599420945
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -18,8 +18,6 @@ public class Enemy : MonoBehaviour
         Boss
     }
 
-    private static int roleIndex = 0;
-
     [SerializeField] private int HPMax;
     [SerializeField] private int ATT;
     [SerializeField] private int CanonBoatATT;
@@ -28,22 +26,29 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int BoostPower;
     
 
-    private bool isBoosted;
+    public bool isBoosted;
     public Type type;
-    public GameObject AxolotlPF;
-    public GameObject MedusePF;
-    public GameObject BlobFishPF;
-    public GameObject CalamarPF;
-    public GameObject BossPF;
+
 
     private Player player;
-    private StatsManager statsManager;
+    public List<Player> allPlayers;
+    public StatsManager statsManager;
+    
 
-    private int HP { get; set; }
+    public int HP;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Initialisation de la liste des joueurs présents dans la scène
+        allPlayers = new List<Player>(FindObjectsOfType<Player>());
+        statsManager = FindObjectOfType<StatsManager>();
+
+            // HP de départ
+        HP = HPMax;
+
+            // (Ton switch type ici si tu veux faire un comportement selon le type)
+  
         switch (type)
         {
             case Type.Fighter:
@@ -57,81 +62,15 @@ public class Enemy : MonoBehaviour
             case Type.Boss:
                 break;
         }
-        
-        AssignType();
-        ChangePrefab();
-        HP = HPMax;
-        
+
+
     }
-
-    //Bases pour randomiser le type de monstre et relier leurs stats et prefab dès leur instantiation
-
-    private void AssignType()
-    {
-        roleIndex = UnityEngine.Random.Range(1, 4);
-
-        // Définir le rôle basé sur l'index aléatoire
-        type = (Type)roleIndex;
-    }
-
-    public void ChangePrefab()
-    {
-        if (roleIndex == 1)
-        {
-            AxolotlPF.SetActive(true);
-            HPMax = 75;
-            ATT = 25;
-            CanonBoatATT = 0;
-            AllATT = 0;
-            HealPower = 0;
-            BoostPower = 0;
-        }
-        if (roleIndex == 2)
-        {
-            CalamarPF.SetActive(true);
-            HPMax = 100;
-            ATT = 0;
-            CanonBoatATT = 75;
-            AllATT = 0;
-            HealPower = 0;
-            BoostPower = 0;
-        }
-        if (roleIndex == 3)
-        {
-            BlobFishPF.SetActive(true);
-            HPMax = 75;
-            ATT = 10;
-            CanonBoatATT = 0;
-            AllATT = 0;
-            HealPower = 20;
-            BoostPower = 15;
-        }
-        if (roleIndex == 4)
-        {
-            MedusePF.SetActive(true);
-            HPMax = 75;
-            ATT = 0;
-            CanonBoatATT = 0;
-            AllATT = 10;
-            HealPower = 0;
-            BoostPower = 0;
-        }
-
-        if(roleIndex ==5)
-        {
-            BossPF.SetActive(true);
-            HPMax = 250;
-            ATT = 30;
-            CanonBoatATT = 100;
-            AllATT = 20;
-            HealPower = 20;
-            BoostPower = 0;
-        }
-    }
-
     public void Attack()
     {
-        player.SetHP(HP -= ATT);
+
+        player.HP -= ATT;
+
+        Debug.Log("un joueur a été attaqué");
     }
     public void CanonBoatAttack()
     {
@@ -140,45 +79,50 @@ public class Enemy : MonoBehaviour
         if (focus <= 3)
         {
             statsManager.boatHealth-=CanonBoatATT;
+            statsManager.UpdateText();
         }
         else
         {
             statsManager.canonHealth -= CanonBoatATT;
+            statsManager.UpdateText();
         }
+
+        Debug.Log("le canon ou bateau a été attaqué");
     }
 
     public void AllAttack()
     {
+        int tempATT;
         var chance = Random.Range(1, 100);
 
         if (chance <= 15)
-        {
-            ATT = 5;
-        }
+            tempATT = 5;
         else if (chance <= 50)
-        {
-            ATT = 10;
-        }
+            tempATT = 10;
         else if (chance <= 85)
-        {
-            ATT = 15;
-        }
+            tempATT = 15;
         else
+            tempATT = 20;
+
+        foreach (var p in allPlayers)
         {
-            ATT = 20;
+            p.HP -= tempATT; 
         }
 
-        Attack();
+        Debug.Log("un monstre a attaqué tous les joueurs");
     }
 
     public void Boost()
     {
         isBoosted = true;
         ATT += BoostPower;
+
+        Debug.Log("un monstre a été boosté");
     }
 
     public void Heal()
     {
         HP += HealPower;
+        Debug.Log("un monstre a été soigné");
     }
 }

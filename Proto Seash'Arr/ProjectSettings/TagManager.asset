@@ -12,6 +12,7 @@ TagManager:
   - Ancre
   - Enemy
   - BattleManager
+  - PanelChoixCombat
   layers:
   - Default
   - TransparentFX

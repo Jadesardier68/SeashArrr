@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 1604255653722574052}
   - component: {fileID: 7132221826864183330}
   - component: {fileID: 3240420471182445783}
+  - component: {fileID: -6113745262289985193}
   m_Layer: 0
   m_Name: Calamar
   m_TagString: Enemy
@@ -376,3 +377,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6113745262289985193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8875986175607078703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afa106d9b1f14e46b95525c2a9028d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPMax: 100
+  ATT: 0
+  CanonBoatATT: 75
+  AllATT: 0
+  HealPower: 0
+  BoostPower: 0
+  type: 1
