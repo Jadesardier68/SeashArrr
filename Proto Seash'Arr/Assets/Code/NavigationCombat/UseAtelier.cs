@@ -26,7 +26,6 @@ public class UseAtelier : MonoBehaviour
         while (true)
         {
             ateliers = new List<AtelierManager>(FindObjectsOfType<AtelierManager>());
-            Debug.Log("Nombre total de scripts AtelierManager dans la scène : " + ateliers.Count);
             yield return new WaitForSeconds(refreshRate);
         }
     }

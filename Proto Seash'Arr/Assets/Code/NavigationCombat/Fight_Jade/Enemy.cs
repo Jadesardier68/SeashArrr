@@ -65,12 +65,37 @@ public class Enemy : MonoBehaviour
 
 
     }
+
+    public int GetHP()
+    {
+        return HP;
+    }
+
+    public void SetHP(int value)
+    {
+        HP = Mathf.Clamp(value, 0, HPMax); // pour éviter des HP négatifs ou > max
+        if (HP <= 0)
+        {
+            Die(); // si tu veux gérer la mort ici
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log($"{name} est mort.");
+        Destroy(gameObject);
+    }
+
+
     public void Attack()
     {
+        List<Player> alivePlayers = allPlayers.FindAll(p => p.HP > 0);
+        if (alivePlayers.Count == 0) return;
 
-        player.HP -= ATT;
+        Player target = alivePlayers[Random.Range(0, alivePlayers.Count)];
+        target.HP -= ATT;
 
-        Debug.Log("un joueur a été attaqué");
+        Debug.Log("Le joueur " + target.name + " a été attaqué pour " + ATT);
     }
     public void CanonBoatAttack()
     {
@@ -112,17 +137,19 @@ public class Enemy : MonoBehaviour
         Debug.Log("un monstre a attaqué tous les joueurs");
     }
 
-    public void Boost()
-    {
-        isBoosted = true;
-        ATT += BoostPower;
-
-        Debug.Log("un monstre a été boosté");
-    }
-
     public void Heal()
     {
-        HP += HealPower;
-        Debug.Log("un monstre a été soigné");
+        HP = Mathf.Min(HP + HealPower, HPMax);
+        Debug.Log(name + " s'est soigné pour " + HealPower + " HP. Total: " + HP);
+    }
+
+    public void Boost()
+    {
+        if (!isBoosted)
+        {
+            isBoosted = true;
+            ATT += BoostPower;
+            Debug.Log(name + " a été boosté. Nouvelle ATT: " + ATT);
+        }
     }
 }

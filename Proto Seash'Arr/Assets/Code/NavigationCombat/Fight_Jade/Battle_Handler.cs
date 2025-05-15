@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,11 +14,12 @@ public class Battle_Handler : MonoBehaviour
     public bool isTurnOver = false;
     public StatsManager statsManager;
     private bool fightStarted = false;
-
+    public UIManager UIManager;
     void Start()
     {
         Players.Clear();
         Ennemies.Clear();
+        
     }
 
    
@@ -121,7 +122,7 @@ public class Battle_Handler : MonoBehaviour
                 Player player = currentUnit.GetComponent<Player>();
                 if (player != null && player.GetHP() > 0)
                 {
-                    yield return StartCoroutine(player.Action());
+                    yield return StartCoroutine(UIManager.Starter(player, OnPlayerChoice));
                 }
                 else
                 {
@@ -151,6 +152,53 @@ public class Battle_Handler : MonoBehaviour
         }
     }
 
+    private void OnPlayerChoice(int actionIndex, int targetIndex)
+    {
+        Debug.Log($"Player chose action {actionIndex} on target {targetIndex}");
+
+        Player player = Players[currentTurnIndex].GetComponent<Player>(); // ← ici, au début
+
+        // Appliquer l'action ici selon le choix :
+        switch (actionIndex)
+        {
+            case 0: // Attaque
+                if (Ennemies.Count > targetIndex)
+                {
+                    Enemy targetEnemy = Ennemies[targetIndex].GetComponent<Enemy>();
+                    if (targetEnemy != null)
+                    {
+                        targetEnemy.SetHP(targetEnemy.GetHP() - player.ATT);
+                    }
+                }
+                break;
+
+            case 1: // Heal
+                if (Players.Count > targetIndex)
+                {
+                    Player targetPlayer = Players[targetIndex].GetComponent<Player>();
+                    if (targetPlayer != null)
+                    {
+                        targetPlayer.SetHP(targetPlayer.GetHP() + targetPlayer.HealPower);
+                    }
+                }
+                break;
+
+            case 2: // Canon
+                foreach (var e in Ennemies)
+                {
+                    Enemy enemy = e.GetComponent<Enemy>();
+                    enemy.SetHP(enemy.GetHP() - player.CanonPower);
+                }
+                break;
+
+            case 3: // BoatFix
+                statsManager.boatHealth += player.FixPower;
+                statsManager.UpdateText(); // facultatif : pour afficher les PV mis à jour
+                break;
+        }
+
+        isTurnOver = true;
+    }
     private IEnumerator EnemyTurn(Enemy enemy)
     {
         yield return new WaitForSeconds(5f);
