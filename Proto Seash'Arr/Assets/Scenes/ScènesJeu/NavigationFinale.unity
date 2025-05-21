@@ -10557,17 +10557,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008260660}
-  m_LocalRotation: {x: -0, y: -0, z: 0.04704188, w: 0.9988929}
+  m_LocalRotation: {x: 0.04704543, y: 0.9988928, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.5368, y: 3.5368, z: 3.5368}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1839536356}
+  m_Children: []
   m_Father: {fileID: 1811073691}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5.393}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 5.393}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -693, y: -338}
+  m_AnchoredPosition: {x: -736, y: -338}
   m_SizeDelta: {x: 134.7962, y: 134.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1008260662
@@ -10590,7 +10589,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43d7254c66036d24899dee597ef31fda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6559bc5052cbea544a1d69c5a3b518c4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11942,7 +11941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1190524343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14888,16 +14887,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Players: []
   Ennemies: []
+  turnOrder: []
+  currentUnit: {fileID: 0}
   BanqueEnnemies:
   - {fileID: 514435952787283655, guid: b860616c948fb18459ecccf1cedfb09c, type: 3}
   - {fileID: 8875986175607078703, guid: 924d56241ac09874f9e434017202861c, type: 3}
   - {fileID: 7770142117679388419, guid: b605b5e3f9dc8394980e0e0536995baf, type: 3}
-  turnOrder: []
   isBattleOver: 0
   isTurnOver: 0
   statsManager: {fileID: 4359715218010467453}
   UIManager: {fileID: 1508727576}
-  currentUnit: {fileID: 0}
 --- !u!114 &1508727576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14910,23 +14909,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da7105d55ddf644faaefacef14b9efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ordrePanel: {fileID: 1971557460}
+  ordrePanel: {fileID: 1937470596}
+  actionPanel: {fileID: 502488179}
   targetPanel: {fileID: 740209450}
-  choicePanel: {fileID: 502488179}
   targetButtons:
   - {fileID: 1263178190}
   - {fileID: 819333111}
   - {fileID: 1687355251}
-  AttackInput:
+  attackInput:
     m_Name: Attack Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ea203047-cdaf-473d-bb09-a67375561a68
+    m_Id: 194f460b-0566-4da1-a52c-9345e47176d4
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: bbfd37e3-f02f-4d26-bc11-5ea7796ed0b5
+      m_Id: 4d837e57-09f7-40d4-bbd2-69e16f8d0ec3
       m_Path: <XInputController>/buttonSouth
       m_Interactions: 
       m_Processors: 
@@ -14934,16 +14933,16 @@ MonoBehaviour:
       m_Action: Attack Input
       m_Flags: 0
     m_Flags: 0
-  HealInput:
+  healInput:
     m_Name: Heal Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 560584bb-8196-433b-a3a9-99dc1d4f2079
+    m_Id: d316d5f2-06af-4c5e-a9f2-eedb67bab4c1
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 41d1dad3-2932-4864-8c5b-9c0204272936
+      m_Id: f34fed9c-04b2-49fd-9d3f-09740eac68c0
       m_Path: <XInputController>/buttonWest
       m_Interactions: 
       m_Processors: 
@@ -14951,16 +14950,16 @@ MonoBehaviour:
       m_Action: Heal Input
       m_Flags: 0
     m_Flags: 0
-  CanonInput:
+  canonInput:
     m_Name: Canon Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ae9df2e2-0de6-485f-8a66-0fc593ff24bf
+    m_Id: 6976977e-fa76-418a-ae12-4ceb5202e524
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: dc35cf47-d3b6-4877-9370-3e2661cae43a
+      m_Id: bb2d3653-027f-4c4a-886b-96bcabd3e050
       m_Path: <XInputController>/buttonEast
       m_Interactions: 
       m_Processors: 
@@ -14968,30 +14967,25 @@ MonoBehaviour:
       m_Action: Canon Input
       m_Flags: 0
     m_Flags: 0
-  BoatFixInput:
-    m_Name: Boat Fix Input
+  fixBoatInput:
+    m_Name: Fix Boat Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: eb7b422a-bc38-4a21-8be4-f08e2a74e031
+    m_Id: 4f44a89f-452f-47e4-ae0f-baa966c594e7
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 35ccb22d-fa22-436d-9107-bd2d4b65fd39
+      m_Id: 5614045a-b727-4a71-8148-cb17c67a4dde
       m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Boat Fix Input
+      m_Action: Fix Boat Input
       m_Flags: 0
     m_Flags: 0
   statsManager: {fileID: 4359715218010467453}
   battleHandler: {fileID: 1508727575}
-  selectedAction: -1
-  selectedTarget: -1
-  actionChosen: 0
-  targetChosen: 0
-  currentTargetIndex: 0
 --- !u!1 &1509089517
 GameObject:
   m_ObjectHideFlags: 0
@@ -18115,6 +18109,7 @@ RectTransform:
   - {fileID: 333268456}
   - {fileID: 630338500}
   - {fileID: 1008260661}
+  - {fileID: 1839536356}
   m_Father: {fileID: 1190524346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -18287,16 +18282,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839536355}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.04704188, w: 0.9988929}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.5368, y: 3.5368, z: 3.5368}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1008260661}
+  m_Father: {fileID: 1811073691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.2, y: 26.4}
+  m_AnchoredPosition: {x: -547.44934, y: -111.10901}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1839536357
@@ -19544,7 +19539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1937470597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19777,7 +19772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1971557461
 RectTransform:
   m_ObjectHideFlags: 0

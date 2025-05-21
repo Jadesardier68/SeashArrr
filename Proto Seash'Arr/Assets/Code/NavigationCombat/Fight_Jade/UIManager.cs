@@ -9,136 +9,131 @@ public class UIManager : MonoBehaviour
 {
     [Header("Panels")]
     public GameObject ordrePanel;
+    public GameObject actionPanel;
     public GameObject targetPanel;
-    public GameObject choicePanel;
 
-    [Header("Buttons")]
+    [Header("Target Buttons")]
     public Button[] targetButtons;
 
-    [Header("Inputs")]
-    public InputAction AttackInput;
-    public InputAction HealInput;
-    public InputAction CanonInput;
-    public InputAction BoatFixInput;
+    [Header("Input System Actions")]
+    public InputAction attackInput;
+    public InputAction healInput;
+    public InputAction canonInput;
+    public InputAction fixBoatInput;
 
     [Header("References")]
     public StatsManager statsManager;
     public Battle_Handler battleHandler;
 
-    [Header("State")]
     private Player currentPlayer;
-    public int selectedAction = -1;
-    public int selectedTarget = -1;
-    public bool actionChosen = false;
-    public bool targetChosen = false;
-    public int currentTargetIndex;
 
-    public List<GameObject> Enemies => battleHandler != null ? battleHandler.Ennemies : new List<GameObject>();
-    public List<GameObject> Players => battleHandler != null ? battleHandler.Players : new List<GameObject>();
+    private int selectedAction = -1;
+    private int selectedTarget = -1;
+    private bool actionSelected = false;
+    private bool targetSelected = false;
 
-    private void Start()
+    private void Awake()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("StatsManager");
-        GameObject battleManager = GameObject.FindGameObjectWithTag("BattleManager");
+        // Assigner les références dynamiquement si besoin
+        if (statsManager == null)
+            statsManager = FindObjectOfType<StatsManager>();
+        if (battleHandler == null)
+            battleHandler = FindObjectOfType<Battle_Handler>();
+    }
 
-        if (playerObject != null)
-            statsManager = playerObject.GetComponent<StatsManager>();
-
-        if (battleManager != null)
-            battleHandler = battleManager.GetComponent<Battle_Handler>();
-
+    private void OnEnable()
+    {
         EnableInputs();
+    }
+
+    private void OnDisable()
+    {
+        DisableInputs();
     }
 
     private void EnableInputs()
     {
-        AttackInput.Enable();
-        AttackInput.performed += OnAttack;
+        attackInput.Enable();
+        healInput.Enable();
+        canonInput.Enable();
+        fixBoatInput.Enable();
 
-        HealInput.Enable();
-        HealInput.performed += OnHeal;
-
-        CanonInput.Enable();
-        CanonInput.performed += OnCanon;
-
-        BoatFixInput.Enable();
-        BoatFixInput.performed += OnBoatFix;
+        attackInput.performed += ctx => SelectAction(0); // Attack
+        healInput.performed += ctx => SelectAction(1);   // Heal
+        canonInput.performed += ctx => SelectAction(2);  // Canon
+        fixBoatInput.performed += ctx => SelectAction(3); // Fix
     }
 
     private void DisableInputs()
     {
-        AttackInput.Disable();
-        HealInput.Disable();
-        CanonInput.Disable();
-        BoatFixInput.Disable();
+        attackInput.Disable();
+        healInput.Disable();
+        canonInput.Disable();
+        fixBoatInput.Disable();
     }
 
     private bool CanPlayerAct()
     {
-        return battleHandler != null
-            && !battleHandler.isTurnOver
-            && battleHandler.currentUnit != null
-            && battleHandler.currentUnit.CompareTag("Player")
-            && statsManager != null
-            && statsManager.inputActionMap.enabled;
+        return battleHandler != null &&
+               battleHandler.currentUnit != null &&
+               battleHandler.currentUnit.CompareTag("Player") &&
+               !battleHandler.isTurnOver;
     }
 
-    public IEnumerator Starter(Player player, Action<int, int> onChoiceComplete)
+    public IEnumerator StartPlayerTurn(Player player, Action<int, int> onTurnComplete)
     {
-        if (!CanPlayerAct())
-        {
-            Debug.LogWarning("Player can't act: not their turn or input map disabled.");
-            yield break;
-        }
-
         currentPlayer = player;
         selectedAction = -1;
         selectedTarget = -1;
-        actionChosen = false;
-        targetChosen = false;
+        actionSelected = false;
+        targetSelected = false;
 
-        EnableInputs();
+        actionPanel.SetActive(true);
+        targetPanel.SetActive(false);
 
-        // Attendre le choix d'action
-        yield return new WaitUntil(() => actionChosen);
+        yield return new WaitUntil(() => actionSelected);
 
-        // Si pas besoin de cible (canon ou réparation), on considère la cible choisie
-        if (selectedAction == 2 || selectedAction == 3)
+        actionPanel.SetActive(false);
+
+        // Si l’action nécessite un ciblage
+        if (selectedAction == 0 || selectedAction == 1) // Attack or Heal
         {
-            targetChosen = true;
-        }
-        else
-        {
-            // Sinon activer panel cible et attendre choix
-            choicePanel.SetActive(false);
-            targetPanel.SetActive(true);
             yield return StartCoroutine(HandleTargetSelection());
         }
 
-        // Désactiver les panels seulement après que cible soit choisie
-        
-
-        DisableInputs();
-
-        onChoiceComplete?.Invoke(selectedAction, selectedTarget);
-        battleHandler.isTurnOver = true;
+        onTurnComplete?.Invoke(selectedAction, selectedTarget);
     }
+
+    private void SelectAction(int action)
+    {
+        if (!CanPlayerAct()) return;
+
+        selectedAction = action;
+        actionSelected = true;
+
+        Debug.Log($"Action sélectionnée : {action}");
+    }
+
     private IEnumerator HandleTargetSelection()
     {
-        targetPanel.SetActive(true);
+        List<GameObject> targets = selectedAction == 1 ? battleHandler.Players : battleHandler.Ennemies;
 
-        // Choix des cibles en fonction de l'action
-        List<GameObject> targetList = selectedAction == 1 ? Players : Enemies;
+        targetSelected = false;
+        selectedTarget = -1;
 
+        // Afficher les bons boutons
         for (int i = 0; i < targetButtons.Length; i++)
         {
-            if (i < targetList.Count)
+            if (i < targets.Count)
             {
                 int index = i;
-                targetButtons[i].gameObject.SetActive(true);
-                targetButtons[i].GetComponentInChildren<Text>().text = targetList[i].name;
-                targetButtons[i].onClick.RemoveAllListeners();
-                targetButtons[i].onClick.AddListener(() => SelectTarget(index));
+                GameObject target = targets[i];
+                Button btn = targetButtons[i];
+
+                btn.gameObject.SetActive(true);
+                btn.GetComponentInChildren<Text>().text = target.name;
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => OnTargetSelected(index));
             }
             else
             {
@@ -146,53 +141,17 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        yield return new WaitUntil(() => targetChosen);
+        targetPanel.SetActive(true);
+
+        yield return new WaitUntil(() => targetSelected);
 
         targetPanel.SetActive(false);
     }
 
-    private void SelectTarget(int index)
+    private void OnTargetSelected(int index)
     {
         selectedTarget = index;
-        targetChosen = true;
-        Debug.Log("Target sélectionnée : " + index);
-    }
-
-    private void OnAttack(InputAction.CallbackContext context)
-    {
-        if (!CanPlayerAct()) return;
-
-        selectedAction = 0; // Attaque
-        actionChosen = true;
-        Debug.Log("Action: Attaque choisie.");
-    }
-
-    private void OnHeal(InputAction.CallbackContext context)
-    {
-        if (!CanPlayerAct()) return;
-
-        selectedAction = 1; // Soin
-        actionChosen = true;
-        Debug.Log("Action: Soin choisie.");
-    }
-
-    private void OnCanon(InputAction.CallbackContext context)
-    {
-        if (!CanPlayerAct()) return;
-
-        selectedAction = 2; // Canon (aucune cible directe)
-        selectedTarget = -1;
-        actionChosen = true;
-        Debug.Log("Action: Canon choisie.");
-    }
-
-    private void OnBoatFix(InputAction.CallbackContext context)
-    {
-        if (!CanPlayerAct()) return;
-
-        selectedAction = 3; // Réparation bateau
-        selectedTarget = -1;
-        actionChosen = true;
-        Debug.Log("Action: Réparation du bateau choisie.");
+        targetSelected = true;
+        Debug.Log($"Cible sélectionnée : {index}");
     }
 }

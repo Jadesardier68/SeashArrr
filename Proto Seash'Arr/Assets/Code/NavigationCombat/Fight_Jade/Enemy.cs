@@ -18,12 +18,12 @@ public class Enemy : MonoBehaviour
         Boss
     }
 
-    [SerializeField] private int HPMax;
-    [SerializeField] private int ATT;
-    [SerializeField] private int CanonBoatATT;
-    [SerializeField] private int AllATT;
-    [SerializeField] private int HealPower;
-    [SerializeField] private int BoostPower;
+     public int HPMax;
+     public int ATT;
+     public int CanonBoatATT;
+    public int AllATT;
+    public int HealPower;
+    public int BoostPower;
     
 
     public bool isBoosted;

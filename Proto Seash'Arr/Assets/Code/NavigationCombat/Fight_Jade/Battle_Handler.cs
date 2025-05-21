@@ -5,18 +5,17 @@ using UnityEngine.InputSystem;
 
 public class Battle_Handler : MonoBehaviour
 {
-    public List<GameObject> Players = new List<GameObject>();
-    public List<GameObject> Ennemies = new List<GameObject>();
+    [HideInInspector] public List<GameObject> Players = new List<GameObject>();
+    [HideInInspector] public List<GameObject> Ennemies = new List<GameObject>();
+    [HideInInspector] public List<GameObject> turnOrder = new List<GameObject>();
+    [HideInInspector] public GameObject currentUnit;
     public GameObject[] BanqueEnnemies;
-    public List<GameObject> turnOrder = new List<GameObject>();
     private int currentTurnIndex = 0;
     public bool isBattleOver = false;
     public bool isTurnOver = false;
     public StatsManager statsManager;
     private bool fightStarted = false;
     public UIManager UIManager;
-
-    public GameObject currentUnit;
 
     void Start()
     {
@@ -127,10 +126,10 @@ public class Battle_Handler : MonoBehaviour
             {
                 Player player = currentUnit.GetComponent<Player>();
                 isTurnOver = false;
-                UIManager.choicePanel.SetActive(true);
+                
                 if (player != null && player.HP > 0)
                 {
-                    yield return StartCoroutine(UIManager.Starter(player, OnPlayerChoice));
+                    yield return StartCoroutine(UIManager.StartPlayerTurn(player, OnPlayerChoice));
                 }
 
             }
