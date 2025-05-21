@@ -15,14 +15,17 @@ public class Battle_Handler : MonoBehaviour
     public StatsManager statsManager;
     private bool fightStarted = false;
     public UIManager UIManager;
+
+    public GameObject currentUnit;
+
     void Start()
     {
         Players.Clear();
         Ennemies.Clear();
-        
+
     }
 
-   
+
 
     private void Update()
     {
@@ -37,6 +40,7 @@ public class Battle_Handler : MonoBehaviour
     {
         Players.Clear();
         Ennemies.Clear();
+
 
         Players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
@@ -69,9 +73,9 @@ public class Battle_Handler : MonoBehaviour
     {
         int enemyCount;
 
-        if (statsManager.TimerTotal < 300) 
+        if (statsManager.TimerTotal < 300)
             enemyCount = 3;
-        else if (statsManager.TimerTotal < 600) 
+        else if (statsManager.TimerTotal < 600)
             enemyCount = 4;
         else
             enemyCount = 5;
@@ -93,7 +97,7 @@ public class Battle_Handler : MonoBehaviour
 
     private IEnumerator BattleLoop()
     {
-        yield return new WaitForSeconds(2f); 
+        yield return new WaitForSeconds(2f);
 
         while (!isBattleOver)
         {
@@ -113,21 +117,22 @@ public class Battle_Handler : MonoBehaviour
                 fightStarted = false;
                 yield break;
             }
-            GameObject currentUnit = turnOrder[currentTurnIndex];
+
+
+            currentUnit = turnOrder[currentTurnIndex];
             Debug.Log(turnOrder[currentTurnIndex] + "joue");
             isTurnOver = false;
 
             if (currentUnit.CompareTag("Player"))
             {
                 Player player = currentUnit.GetComponent<Player>();
-                if (player != null && player.GetHP() > 0)
+                isTurnOver = false;
+                UIManager.choicePanel.SetActive(true);
+                if (player != null && player.HP > 0)
                 {
                     yield return StartCoroutine(UIManager.Starter(player, OnPlayerChoice));
                 }
-                else
-                {
-                    isTurnOver = true;
-                }
+
             }
             else if (currentUnit.CompareTag("Enemy"))
             {
@@ -148,11 +153,11 @@ public class Battle_Handler : MonoBehaviour
 
             currentTurnIndex = (currentTurnIndex + 1) % turnOrder.Count;
 
-            yield return new WaitForSeconds(1f); 
+            yield return new WaitForSeconds(1f);
         }
     }
 
-    private void OnPlayerChoice(int actionIndex, int targetIndex)
+    public void OnPlayerChoice(int actionIndex, int targetIndex)
     {
         Debug.Log($"Player chose action {actionIndex} on target {targetIndex}");
 
@@ -217,7 +222,7 @@ public class Battle_Handler : MonoBehaviour
                 int choice = Random.Range(0, 3);
                 if (choice == 0) enemy.Heal();
                 else if (choice == 1) enemy.Boost();
-               // else enemy.Attack();
+                // else enemy.Attack();
 
                 break;
 
@@ -236,6 +241,3 @@ public class Battle_Handler : MonoBehaviour
         isTurnOver = true;
     }
 }
-
-
-

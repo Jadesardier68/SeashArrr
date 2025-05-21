@@ -117,7 +117,10 @@ public class StatsManager : MonoBehaviour
 
     public UIManager UIManager;
 
-void Start()
+    public InputActionAsset Controls;
+    public InputActionMap inputActionMap;
+
+    void Start()
     {
         carte.SetActive(true);
         UI.SetActive(false);
@@ -137,6 +140,9 @@ void Start()
     { "Sil", Sil },
     { "Ahuizotl", Ahuizotl }
 };
+
+        inputActionMap = Controls.FindActionMap("GamePlayFight");
+        inputActionMap.Disable();
     }
 
     private IEnumerator RefreshAtelierList()
@@ -220,6 +226,7 @@ void Start()
                 atelier.cuisineActive = false;
                 atelier.tableIngenieurActive = false;
                 atelier.piqueNiqueActive = false;
+                inputActionMap.Enable();
             }
 
             if(battleHandler.isBattleOver == true)

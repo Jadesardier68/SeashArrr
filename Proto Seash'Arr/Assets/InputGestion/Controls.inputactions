@@ -407,6 +407,94 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "GamePlayFight",
+            "id": "e5735fa5-1107-4b68-a642-73900aba8245",
+            "actions": [
+                {
+                    "name": "Attaquer",
+                    "type": "Button",
+                    "id": "2c6024ca-98bd-462a-a929-b3848a392ea8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Canon",
+                    "type": "Button",
+                    "id": "4bd49797-662f-40dc-9393-f8a47927a384",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Réparer",
+                    "type": "Button",
+                    "id": "0589b5e0-6d92-4610-83e4-d0ec4119e2a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Soigner",
+                    "type": "Button",
+                    "id": "413606ed-8a70-494d-842e-091e9d4acdec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "318e7bcd-b47f-402b-83a5-53a79e30017d",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attaquer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf75edca-6be0-4ef8-80d4-0ab697e082c3",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Canon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8f3e433-bafa-436b-9103-6246bf0b7b90",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Réparer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b5e6e18-5d13-4fe2-bd07-274f97f4fb0e",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Soigner",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

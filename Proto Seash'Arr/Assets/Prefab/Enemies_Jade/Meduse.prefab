@@ -131,7 +131,7 @@ Transform:
   m_GameObject: {fileID: 7770142117679388419}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 432, y: 134, z: -924}
   m_LocalScale: {x: 9.936, y: 9.936, z: 9.936}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -227,7 +227,11 @@ MonoBehaviour:
   AllATT: 10
   HealPower: 0
   BoostPower: 0
+  isBoosted: 0
   type: 3
+  allPlayers: []
+  statsManager: {fileID: 0}
+  HP: 0
 --- !u!1 &9014262346646048220
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +246,7 @@ GameObject:
   - component: {fileID: 6721786485408002040}
   m_Layer: 0
   m_Name: ButtonAtelier
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
