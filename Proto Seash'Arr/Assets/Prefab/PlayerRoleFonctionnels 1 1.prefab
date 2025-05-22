@@ -5623,7 +5623,7 @@ GameObject:
   - component: {fileID: 4893049328932158969}
   m_Layer: 0
   m_Name: Doctor
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6024,7 +6024,7 @@ GameObject:
   - component: {fileID: 173881219844568421}
   m_Layer: 0
   m_Name: PlayerRoleFonctionnels 1 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6319,9 +6319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3efd2de4cb6294288783e4b40ad184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIBattle: {fileID: 0}
-  UIBattleItems: {fileID: 0}
-  UIBattleFix: {fileID: 0}
   HPMax: 100
   ATT: 0
   CanonPower: 0
@@ -13979,7 +13976,7 @@ GameObject:
   - component: {fileID: 1267148100830906524}
   m_Layer: 0
   m_Name: Captain
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

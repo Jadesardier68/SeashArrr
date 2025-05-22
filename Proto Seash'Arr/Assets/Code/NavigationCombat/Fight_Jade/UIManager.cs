@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator StartPlayerTurn(Player player, Action<int, int> onTurnComplete)
     {
+        Debug.Log("tkt je me lance");
         currentPlayer = player;
         selectedAction = -1;
         selectedTarget = -1;
@@ -89,6 +90,7 @@ public class UIManager : MonoBehaviour
         targetSelected = false;
 
         actionPanel.SetActive(true);
+        Debug.Log("j'ai affiché le panel");
         targetPanel.SetActive(false);
 
         yield return new WaitUntil(() => actionSelected);

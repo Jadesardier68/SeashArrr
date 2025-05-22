@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UseAtelier;
 
 public class AtelierManager : MonoBehaviour
 {
@@ -255,6 +256,26 @@ public class AtelierManager : MonoBehaviour
         if (PanelPiqueNique != null) ClosePanel(PanelPiqueNique);
         if (PanelCanon != null) ClosePanel(PanelCanon);
         if (PanelAncre != null) ClosePanel(PanelAncre);
+    }
+
+    public void HideAllSliders()
+    {
+        CuisineSlider?.gameObject.SetActive(false);
+        IngeniorSlider?.gameObject.SetActive(false);
+        CanonSlider?.gameObject.SetActive(false);
+        PiqueNiqueSlider?.gameObject.SetActive(false);
+    }
+
+    public Slider GetSliderForType(AtelierType type)
+    {
+        return type switch
+        {
+            AtelierType.Cuisine => CuisineSlider,
+            AtelierType.Ingenieur => IngeniorSlider,
+            AtelierType.Canon => CanonSlider,
+            AtelierType.PiqueNique => PiqueNiqueSlider,
+            _ => null
+        };
     }
 
 }

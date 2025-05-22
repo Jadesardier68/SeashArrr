@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using static Player;
+using static UseAtelier;
 
 public class StatsManager : MonoBehaviour
 {
@@ -209,8 +210,8 @@ public class StatsManager : MonoBehaviour
 
                 if (ancreActives == 2)
                 {
-          
-                    useAtelier.AnnulerAction();
+
+                    useAtelier.AnnulerToutesActions();
                     Navigation = false;
                     Ressources = true;
                     UIPopUpRessources.SetActive(false);

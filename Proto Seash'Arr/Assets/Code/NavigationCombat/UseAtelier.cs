@@ -7,18 +7,39 @@ public class UseAtelier : MonoBehaviour
 {
     public StatsManager StatsManager;
     private List<AtelierManager> ateliers = new List<AtelierManager>();
-    public float tempsAction;
-    public float timer;
-    public bool isBusy = false;
-    private Coroutine currentActionCoroutine;
+    private Dictionary<AtelierType, CoroutineData> coroutineMap = new();
     private AtelierManager currentAtelier;
 
-    [SerializeField] private float refreshRate = 2f; // Temps entre chaque mise à jour (en secondes)
+    [SerializeField] private float refreshRate = 2f;
 
+    // Occupation par type d'atelier
+    private Dictionary<AtelierType, bool> atelierBusyMap = new Dictionary<AtelierType, bool>();
+    private Dictionary<AtelierType, Coroutine> activeCoroutines = new Dictionary<AtelierType, Coroutine>();
+    private Dictionary<AtelierType, AtelierManager> activeAteliers = new Dictionary<AtelierType, AtelierManager>();
+    public enum AtelierType
+    {
+        Cuisine,
+        Ingenieur,
+        Canon,
+        PiqueNique
+    }
+
+    private class CoroutineData
+    {
+        public Coroutine Coroutine;
+        public float TempsAction;
+        public float Timer;
+    }
 
     private void Start()
     {
         StartCoroutine(RefreshAtelierList());
+
+        // Initialisation de l'état des ateliers
+        foreach (AtelierType type in System.Enum.GetValues(typeof(AtelierType)))
+        {
+            atelierBusyMap[type] = false;
+        }
     }
 
     private IEnumerator RefreshAtelierList()
@@ -43,74 +64,86 @@ public class UseAtelier : MonoBehaviour
         return null;
     }
 
-    private void TryAction(string actionName, System.Action<AtelierManager> action, System.Action onActionCompleted = null)
+    private bool IsAtelierBusy(AtelierType type)
     {
-        if (!isBusy)
+        return atelierBusyMap.ContainsKey(type) && atelierBusyMap[type];
+    }
+
+    private void SetAtelierBusy(AtelierType type, bool state)
+    {
+        if (atelierBusyMap.ContainsKey(type))
+            atelierBusyMap[type] = state;
+    }
+
+    private void TryAction(string actionName, AtelierType type, float tempsAction, System.Action<AtelierManager> action, System.Action onActionCompleted = null)
+    {
+        if (!IsAtelierBusy(type))
         {
-            currentActionCoroutine = StartCoroutine(ActionRoutine(actionName, action, onActionCompleted));
+            Coroutine routine = StartCoroutine(ActionRoutine(actionName, type, tempsAction, action, onActionCompleted));
+            coroutineMap[type] = new CoroutineData
+            {
+                Coroutine = routine,
+                TempsAction = tempsAction,
+                Timer = 0
+            };
         }
         else
         {
-            Debug.Log("Action bloquée : une autre est déjà en cours.");
+            Debug.Log($"Action bloquée : {type} déjà occupé.");
         }
     }
 
-    private IEnumerator ActionRoutine(string actionName, System.Action<AtelierManager> action, System.Action onActionCompleted)
+    private IEnumerator ActionRoutine(string actionName, AtelierType type, float tempsAction, System.Action<AtelierManager> action, System.Action onActionCompleted)
     {
-        isBusy = true;
+        SetAtelierBusy(type, true);
         Debug.Log("Début de l'action : " + actionName);
 
         AtelierManager activeAtelier = GetActiveAtelier();
-        currentAtelier = activeAtelier;
+        activeAteliers[type] = activeAtelier;
+
         Slider activeSlider = null;
 
         if (activeAtelier != null)
         {
-            activeAtelier.CuisineSlider?.gameObject.SetActive(false);
-            activeAtelier.IngeniorSlider?.gameObject.SetActive(false);
-            activeAtelier.CanonSlider?.gameObject.SetActive(false);
-            activeAtelier.PiqueNiqueSlider?.gameObject.SetActive(false);
+            activeAtelier.HideAllSliders();
+            activeSlider = activeAtelier.GetSliderForType(type);
 
-            if (activeAtelier.PanelCuisine.activeSelf) activeSlider = activeAtelier.CuisineSlider;
-            else if (activeAtelier.PanelTableIngenieur.activeSelf) activeSlider = activeAtelier.IngeniorSlider;
-            else if (activeAtelier.PanelCanon.activeSelf) activeSlider = activeAtelier.CanonSlider;
-            else if (activeAtelier.PanelPiqueNique.activeSelf) activeSlider = activeAtelier.PiqueNiqueSlider;
+            if (activeSlider != null)
+            {
+                activeSlider.gameObject.SetActive(true);
+                activeSlider.maxValue = tempsAction;
+                activeSlider.value = 0;
+            }
         }
 
-        if (activeSlider != null)
-        {
-            activeSlider.gameObject.SetActive(true);
-            activeSlider.maxValue = tempsAction;
-            activeSlider.value = 0;
-        }
+        action?.Invoke(activeAtelier);
 
-        action?.Invoke(activeAtelier); // Phase 1 : début immédiat
-
-        timer = 0f;
+        float timer = 0f;
         while (timer < tempsAction)
         {
             timer += Time.deltaTime;
             if (activeSlider != null)
                 activeSlider.value = timer;
 
+            coroutineMap[type].Timer = timer;
             yield return null;
         }
 
         if (activeSlider != null)
             activeSlider.gameObject.SetActive(false);
 
-        onActionCompleted?.Invoke(); // Phase 2 : effet post-slider
+        onActionCompleted?.Invoke();
 
-        isBusy = false;
-        currentAtelier = null;
+        SetAtelierBusy(type, false);
+        activeCoroutines.Remove(type);
+        activeAteliers.Remove(type);
+        coroutineMap.Remove(type);
+
         Debug.Log("Fin de l'action : " + actionName);
     }
-
-    // Actions (identiques à avant, inchangées)
     public void AmeliorationBateau()
     {
-        tempsAction = 20;
-        TryAction("Amélioration Bateau", (atelier) =>
+        TryAction("Amélioration Bateau", AtelierType.Ingenieur, 20f, (atelier) =>
         {
             if (atelier != null && atelier.PanelTableIngenieur.activeSelf &&
                 StatsManager.nbrWood >= 100 && StatsManager.nbrIron >= 50)
@@ -129,8 +162,8 @@ public class UseAtelier : MonoBehaviour
 
     public void AmeliorationCanon()
     {
-        tempsAction = 16;
-        TryAction("AmeCanon", (atelier) =>
+        
+        TryAction("AmeCanon", AtelierType.Ingenieur, 16f,(atelier) =>
         {
             if (atelier != null && atelier.PanelTableIngenieur.activeSelf &&
                 StatsManager.nbrWood >= 70 && StatsManager.nbrIron >= 30)
@@ -149,8 +182,8 @@ public class UseAtelier : MonoBehaviour
 
     public void ReparerCanon()
     {
-        tempsAction = 10;
-        TryAction("RepCanon", (atelier) =>
+        
+        TryAction("RepCanon", AtelierType.Canon, 10, (atelier) =>
         {
             if (atelier != null && atelier.PanelCanon.activeSelf && StatsManager.nbrWood >= 20)
             {
@@ -160,19 +193,18 @@ public class UseAtelier : MonoBehaviour
         },
         () =>
         {
-            StatsManager.canonHealth += (int)(0.2f * StatsManager.canonMaxHealth);
-            if(StatsManager.canonHealth > StatsManager.canonMaxHealth)
-            {
-                StatsManager.canonHealth=StatsManager.canonMaxHealth;
-            }
+            StatsManager.canonHealth = Mathf.Min(
+                StatsManager.canonHealth + (int)(0.2f * StatsManager.canonMaxHealth),
+                StatsManager.canonMaxHealth
+            );
             StatsManager.UpdateText();
         });
     }
 
     public void ReparerBateau()
     {
-        tempsAction = 10;
-        TryAction("RepBateau", (atelier) =>
+       
+        TryAction("RepBateau", AtelierType.Ingenieur, 10, (atelier) =>
         {
             if (StatsManager.nbrIron >= 20)
             {
@@ -182,15 +214,17 @@ public class UseAtelier : MonoBehaviour
         },
         () =>
         {
-            StatsManager.boatHealth += (int)(0.2f * StatsManager.boatMaxHealth);
+            StatsManager.boatHealth = Mathf.Min(
+                StatsManager.boatHealth + (int)(0.2f * StatsManager.boatMaxHealth),
+                StatsManager.boatMaxHealth
+            );
             StatsManager.UpdateText();
         });
     }
 
     public void CuisinerRhum()
     {
-        tempsAction = 10;
-        TryAction("Rhum", (atelier) =>
+        TryAction("Rhum", AtelierType.Cuisine, 10, (atelier) =>
         {
             if (atelier != null && atelier.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
             {
@@ -207,8 +241,8 @@ public class UseAtelier : MonoBehaviour
 
     public void CuisinerRagout()
     {
-        tempsAction = 10;
-        TryAction("Ragout", (atelier) =>
+        
+        TryAction("Ragout", AtelierType.Cuisine, 10, (atelier) =>
         {
             if (atelier != null && atelier.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
             {
@@ -225,41 +259,43 @@ public class UseAtelier : MonoBehaviour
 
     public void Manger()
     {
-        tempsAction = 5;
-        TryAction("Manger", (atelier) =>
+        
+        TryAction("Manger", AtelierType.PiqueNique, 5, (atelier) =>
         {
             if (atelier != null && atelier.PanelPiqueNique.activeSelf && StatsManager.nbrRagout > 0)
             {
                 StatsManager.nbrRagout -= 1;
                 StatsManager.UpdateText();
             }
-        },
-        () =>
-        {
-            
         });
     }
 
-    public void AnnulerAction()
+    public void AnnulerAction(AtelierType type)
     {
-        if (isBusy && currentActionCoroutine != null)
+        if (atelierBusyMap.ContainsKey(type) && atelierBusyMap[type])
         {
-            StopCoroutine(currentActionCoroutine);
-            currentActionCoroutine = null;
-            isBusy = false;
-            timer = 0;
-
-            if (currentAtelier != null)
+            if (coroutineMap.ContainsKey(type))
             {
-                currentAtelier.CuisineSlider?.gameObject.SetActive(false);
-                currentAtelier.IngeniorSlider?.gameObject.SetActive(false);
-                currentAtelier.CanonSlider?.gameObject.SetActive(false);
-                currentAtelier.PiqueNiqueSlider?.gameObject.SetActive(false);
+                StopCoroutine(coroutineMap[type].Coroutine);
+                coroutineMap.Remove(type);
             }
 
-            currentAtelier = null;
+            if (activeAteliers.ContainsKey(type) && activeAteliers[type] != null)
+            {
+                activeAteliers[type].HideAllSliders();
+                activeAteliers.Remove(type);
+            }
 
-            Debug.Log("Action annulée.");
+            SetAtelierBusy(type, false);
+            Debug.Log("Action annulée sur atelier : " + type);
+        }
+    }
+
+    public void AnnulerToutesActions()
+    {
+        foreach (AtelierType type in System.Enum.GetValues(typeof(AtelierType)))
+        {
+            AnnulerAction(type);
         }
     }
 }

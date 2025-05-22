@@ -52,8 +52,22 @@ public class Battle_Handler : MonoBehaviour
     private void BuildTurnOrder()
     {
         turnOrder.Clear();
-        turnOrder.AddRange(Players);
-        turnOrder.AddRange(Ennemies);
+        foreach (var player in Players)
+        {
+            if (player.GetComponent<Player>() != null)
+                turnOrder.Add(player);
+            else
+                Debug.LogWarning("Player sans component Player détecté : " + player.name);
+        }
+
+        foreach (var enemy in Ennemies)
+        {
+            if (enemy.GetComponent<Enemy>() != null)
+                turnOrder.Add(enemy);
+            else
+                Debug.LogWarning("Enemy sans component Enemy détecté : " + enemy.name);
+        }
+
         ShuffleList(turnOrder);
     }
 
@@ -132,6 +146,10 @@ public class Battle_Handler : MonoBehaviour
                     yield return StartCoroutine(UIManager.StartPlayerTurn(player, OnPlayerChoice));
                 }
 
+                else
+                {
+                    Debug.Log("wesh je veux pas fonctionner");
+                }
             }
             else if (currentUnit.CompareTag("Enemy"))
             {
