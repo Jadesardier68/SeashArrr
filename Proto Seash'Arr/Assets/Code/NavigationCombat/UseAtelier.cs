@@ -12,10 +12,10 @@ public class UseAtelier : MonoBehaviour
 
     [SerializeField] private float refreshRate = 2f;
 
-    // Occupation par type d'atelier
-    private Dictionary<AtelierType, bool> atelierBusyMap = new Dictionary<AtelierType, bool>();
-    private Dictionary<AtelierType, Coroutine> activeCoroutines = new Dictionary<AtelierType, Coroutine>();
-    private Dictionary<AtelierType, AtelierManager> activeAteliers = new Dictionary<AtelierType, AtelierManager>();
+    private Dictionary<AtelierType, bool> atelierBusyMap = new();
+    private Dictionary<AtelierType, Coroutine> activeCoroutines = new();
+    private Dictionary<AtelierType, AtelierManager> activeAteliers = new();
+
     public enum AtelierType
     {
         Cuisine,
@@ -35,7 +35,6 @@ public class UseAtelier : MonoBehaviour
     {
         StartCoroutine(RefreshAtelierList());
 
-        // Initialisation de l'état des ateliers
         foreach (AtelierType type in System.Enum.GetValues(typeof(AtelierType)))
         {
             atelierBusyMap[type] = false;
@@ -122,10 +121,13 @@ public class UseAtelier : MonoBehaviour
         while (timer < tempsAction)
         {
             timer += Time.deltaTime;
+
             if (activeSlider != null)
                 activeSlider.value = timer;
 
-            coroutineMap[type].Timer = timer;
+            if (coroutineMap.ContainsKey(type))
+                coroutineMap[type].Timer = timer;
+
             yield return null;
         }
 
@@ -135,12 +137,21 @@ public class UseAtelier : MonoBehaviour
         onActionCompleted?.Invoke();
 
         SetAtelierBusy(type, false);
-        activeCoroutines.Remove(type);
-        activeAteliers.Remove(type);
-        coroutineMap.Remove(type);
+
+        if (activeCoroutines.ContainsKey(type))
+            activeCoroutines.Remove(type);
+
+        if (activeAteliers.ContainsKey(type))
+            activeAteliers.Remove(type);
+
+        if (coroutineMap.ContainsKey(type))
+            coroutineMap.Remove(type);
 
         Debug.Log("Fin de l'action : " + actionName);
     }
+
+    // ---------- ACTIONS SPÉCIFIQUES ----------
+
     public void AmeliorationBateau()
     {
         TryAction("Amélioration Bateau", AtelierType.Ingenieur, 20f, (atelier) =>
@@ -162,8 +173,7 @@ public class UseAtelier : MonoBehaviour
 
     public void AmeliorationCanon()
     {
-        
-        TryAction("AmeCanon", AtelierType.Ingenieur, 16f,(atelier) =>
+        TryAction("Amélioration Canon", AtelierType.Ingenieur, 16f, (atelier) =>
         {
             if (atelier != null && atelier.PanelTableIngenieur.activeSelf &&
                 StatsManager.nbrWood >= 70 && StatsManager.nbrIron >= 30)
@@ -182,8 +192,7 @@ public class UseAtelier : MonoBehaviour
 
     public void ReparerCanon()
     {
-        
-        TryAction("RepCanon", AtelierType.Canon, 10, (atelier) =>
+        TryAction("Réparation Canon", AtelierType.Canon, 10f, (atelier) =>
         {
             if (atelier != null && atelier.PanelCanon.activeSelf && StatsManager.nbrWood >= 20)
             {
@@ -203,8 +212,7 @@ public class UseAtelier : MonoBehaviour
 
     public void ReparerBateau()
     {
-       
-        TryAction("RepBateau", AtelierType.Ingenieur, 10, (atelier) =>
+        TryAction("Réparation Bateau", AtelierType.Ingenieur, 10f, (atelier) =>
         {
             if (StatsManager.nbrIron >= 20)
             {
@@ -224,7 +232,7 @@ public class UseAtelier : MonoBehaviour
 
     public void CuisinerRhum()
     {
-        TryAction("Rhum", AtelierType.Cuisine, 10, (atelier) =>
+        TryAction("Cuisiner Rhum", AtelierType.Cuisine, 10f, (atelier) =>
         {
             if (atelier != null && atelier.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
             {
@@ -241,8 +249,7 @@ public class UseAtelier : MonoBehaviour
 
     public void CuisinerRagout()
     {
-        
-        TryAction("Ragout", AtelierType.Cuisine, 10, (atelier) =>
+        TryAction("Cuisiner Ragoût", AtelierType.Cuisine, 10f, (atelier) =>
         {
             if (atelier != null && atelier.PanelCuisine.activeSelf && StatsManager.nbrFood >= 20)
             {
@@ -259,8 +266,7 @@ public class UseAtelier : MonoBehaviour
 
     public void Manger()
     {
-        
-        TryAction("Manger", AtelierType.PiqueNique, 5, (atelier) =>
+        TryAction("Manger", AtelierType.PiqueNique, 5f, (atelier) =>
         {
             if (atelier != null && atelier.PanelPiqueNique.activeSelf && StatsManager.nbrRagout > 0)
             {
@@ -270,9 +276,11 @@ public class UseAtelier : MonoBehaviour
         });
     }
 
+    // ---------- ANNULATIONS ----------
+
     public void AnnulerAction(AtelierType type)
     {
-        if (atelierBusyMap.ContainsKey(type) && atelierBusyMap[type])
+        if (IsAtelierBusy(type))
         {
             if (coroutineMap.ContainsKey(type))
             {

@@ -178,13 +178,13 @@ public class Battle_Handler : MonoBehaviour
     {
         Debug.Log($"Player chose action {actionIndex} on target {targetIndex}");
 
-        Player player = Players[currentTurnIndex].GetComponent<Player>(); // ← ici, au début
+        Player player = currentUnit.GetComponent<Player>();
 
         // Appliquer l'action ici selon le choix :
         switch (actionIndex)
         {
             case 0: // Attaque
-                if (Ennemies.Count > targetIndex)
+                if (targetIndex >= 0 && targetIndex < Ennemies.Count)
                 {
                     Enemy targetEnemy = Ennemies[targetIndex].GetComponent<Enemy>();
                     if (targetEnemy != null)
@@ -195,7 +195,7 @@ public class Battle_Handler : MonoBehaviour
                 break;
 
             case 1: // Heal
-                if (Players.Count > targetIndex)
+                if (targetIndex >= 0 && targetIndex < Players.Count)
                 {
                     Player targetPlayer = Players[targetIndex].GetComponent<Player>();
                     if (targetPlayer != null)
