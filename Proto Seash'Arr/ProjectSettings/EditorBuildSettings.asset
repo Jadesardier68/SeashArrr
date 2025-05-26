@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Sc\xE8nesMenusTutosCredits/Menu.unity"
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: "Assets/Scenes/Sc\xE8nesJeu/CharacterChoice.unity"
     guid: a1e2d7413369df24d977e2513306efbb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FightTest.unity
     guid: cc56af89375b5084995e465f60be31e6
   - enabled: 1
