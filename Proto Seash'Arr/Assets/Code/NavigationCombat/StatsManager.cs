@@ -177,8 +177,9 @@ public class StatsManager : MonoBehaviour
             TempsCombat += Time.deltaTime;
             slider.value = TempsNavigation;
 
-            if (TempsCombat >= LancementFight - TimerFightCooldown)
-                UIPopUpEnnemies.SetActive(true);
+            GérerAffichagePopUps();
+
+
 
             if (Mathf.Abs(TempsCombat - LancementFight) < 0.1f)
             {
@@ -196,8 +197,7 @@ public class StatsManager : MonoBehaviour
                 UIManager.ordrePanel.SetActive(true);
             }
 
-            if (TempsNavigation >= TempsBeforeIsland - TimerRessourcesCooldown)
-                UIPopUpRessources.SetActive(true);
+            GérerAffichagePopUps();
 
             if (Mathf.Abs(TempsNavigation - TempsBeforeIsland) < 0.1f || TempsNavigation > TempsBeforeIsland)
             {
@@ -331,6 +331,33 @@ public class StatsManager : MonoBehaviour
         if (islandButtons.ContainsKey(currentIsland))
         {
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(islandButtons[currentIsland].gameObject);
+        }
+    }
+
+    private void GérerAffichagePopUps()
+    {
+        // Si on approche d’un combat, on affiche uniquement le popup ennemis
+        if (TempsCombat >= LancementFight - TimerFightCooldown)
+        {
+            if (UIPopUpRessources.activeSelf)
+                UIPopUpRessources.SetActive(false);
+
+            if (!UIPopUpEnnemies.activeSelf)
+                UIPopUpEnnemies.SetActive(true);
+        }
+        // Si on approche de l’île mais PAS de combat, alors on peut afficher les ressources
+        else if (TempsNavigation >= TempsBeforeIsland - TimerRessourcesCooldown && !Fight)
+        {
+            if (!UIPopUpRessources.activeSelf)
+                UIPopUpRessources.SetActive(true);
+        }
+        else
+        {
+            // Dans tous les autres cas, s’assurer que les deux sont bien cachés
+            if (UIPopUpRessources.activeSelf)
+                UIPopUpRessources.SetActive(false);
+            if (UIPopUpEnnemies.activeSelf)
+                UIPopUpEnnemies.SetActive(false);
         }
     }
 }
