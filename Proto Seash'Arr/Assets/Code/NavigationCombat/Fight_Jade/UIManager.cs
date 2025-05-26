@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -118,6 +119,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator HandleTargetSelection()
     {
+        Debug.Log("allez go à moi");
         List<GameObject> targets = selectedAction == 1 ? battleHandler.Players : battleHandler.Ennemies;
 
         targetSelected = false;
@@ -132,14 +134,34 @@ public class UIManager : MonoBehaviour
                 GameObject target = targets[i];
                 Button btn = targetButtons[i];
 
+                if (btn == null)
+                {
+                    Debug.LogError($"Le bouton à l’index {i} est null.");
+                    continue;
+                }
+
+                if (target == null)
+                {
+                    Debug.LogError($"La cible à l’index {i} est null.");
+                    continue;
+                }
+
+                TMP_Text textComponent = btn.GetComponentInChildren<TMP_Text>();
+                if (textComponent == null)
+                {
+                    Debug.LogError($"Le bouton à l’index {i} n’a pas de composant Text.");
+                    continue;
+                }
+
                 btn.gameObject.SetActive(true);
-                btn.GetComponentInChildren<Text>().text = target.name;
+                textComponent.text = target.name;
                 btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(() => OnTargetSelected(index));
             }
             else
             {
-                targetButtons[i].gameObject.SetActive(false);
+                if (targetButtons[i] != null)
+                    targetButtons[i].gameObject.SetActive(false);
             }
         }
 
