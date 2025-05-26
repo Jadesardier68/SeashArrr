@@ -190,18 +190,27 @@ public class Battle_Handler : MonoBehaviour
                     if (targetEnemy != null)
                     {
                         targetEnemy.SetHP(targetEnemy.GetHP() - player.ATT);
+                        Debug.Log("allez go je l'ai tapé");
                     }
                 }
                 break;
 
             case 1: // Heal
-                if (targetIndex >= 0 && targetIndex < Players.Count)
+                if (targetIndex >= 0 && targetIndex < Players.Count && statsManager.nbrRagout > 0)
                 {
                     Player targetPlayer = Players[targetIndex].GetComponent<Player>();
                     if (targetPlayer != null)
                     {
+                        statsManager.nbrRagout -= 1;
+                        statsManager.UpdateText();
                         targetPlayer.SetHP(targetPlayer.GetHP() + targetPlayer.HealPower);
+                        Debug.Log("j'ai soigné untel");
                     }
+                }
+
+                else
+                {
+                    isTurnOver = true;
                 }
                 break;
 
@@ -210,12 +219,22 @@ public class Battle_Handler : MonoBehaviour
                 {
                     Enemy enemy = e.GetComponent<Enemy>();
                     enemy.SetHP(enemy.GetHP() - player.CanonPower);
+                    Debug.Log("wesh le canon est trop cool");
                 }
                 break;
 
             case 3: // BoatFix
-                statsManager.boatHealth += player.FixPower;
-                statsManager.UpdateText(); // facultatif : pour afficher les PV mis à jour
+                if(statsManager.nbrWood > 20)
+                {
+                    statsManager.boatHealth += player.FixPower;
+                    statsManager.nbrWood -= 20;
+                    statsManager.UpdateText(); // facultatif : pour afficher les PV mis à jour
+                   
+                }
+                else
+                {
+                    isTurnOver = true;
+                }
                 break;
         }
 
