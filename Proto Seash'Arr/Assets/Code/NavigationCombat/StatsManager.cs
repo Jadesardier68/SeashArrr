@@ -77,6 +77,8 @@ public class StatsManager : MonoBehaviour
     private System.Random rnd = new System.Random();
     private string currentIsland = null; // Mémorise la dernière île choisie
 
+    private bool SfxDelay = false;
+
     private Dictionary<(string, string), int> islandTravelTimes = new Dictionary<(string, string), int>()
 {
     { ("Calmar", "Espidoche"), 120 },
@@ -183,6 +185,7 @@ public class StatsManager : MonoBehaviour
 
             if (Mathf.Abs(TempsCombat - LancementFight) < 0.1f)
             {
+                SfxDelay = false;
                 Navigation = false;
                 Fight = true;
                 CameraNavigation.SetActive(false);
@@ -194,6 +197,8 @@ public class StatsManager : MonoBehaviour
                 sliderNavigation.SetActive(false);
                 LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
                 TempsCombat = 0;
+                AudioManager.instance.PlayMusic(AudioManager.Music.FightTheme);
+                
             }
 
             GérerAffichagePopUps();
@@ -214,6 +219,7 @@ public class StatsManager : MonoBehaviour
                     Navigation = false;
                     Ressources = true;
                     UIPopUpRessources.SetActive(false);
+                    SfxDelay = false;
                 }
             }
         }
@@ -323,6 +329,7 @@ public class StatsManager : MonoBehaviour
         slider.value = 0;
         Carte = false;
         Navigation = true;
+        AudioManager.instance.PlayMusic(AudioManager.Music.NavTheme);
     }
 
     private void FocusOnCurrentIslandButton()
@@ -343,12 +350,25 @@ public class StatsManager : MonoBehaviour
 
             if (!UIPopUpEnnemies.activeSelf)
                 UIPopUpEnnemies.SetActive(true);
+            
+            if(!SfxDelay)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.SFX.J_AttackAnnounce);
+                SfxDelay = true;
+            }
         }
         // Si on approche de l’île mais PAS de combat, alors on peut afficher les ressources
         else if (TempsNavigation >= TempsBeforeIsland - TimerRessourcesCooldown && !Fight)
         {
             if (!UIPopUpRessources.activeSelf)
                 UIPopUpRessources.SetActive(true);
+            
+            if (!SfxDelay)
+            {
+                AudioManager.instance.PlaySfx(AudioManager.SFX.J_IslandAnnounce);
+                SfxDelay = true;
+            }
+
         }
         else
         {

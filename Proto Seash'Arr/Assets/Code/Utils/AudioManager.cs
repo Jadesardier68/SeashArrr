@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using Random = System.Random;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
     public AudioMixer mixer;
     public AudioSource music, sfx;
@@ -71,15 +72,24 @@ public class AudioManager : MonoBehaviour
         {
             case Music.MainTheme:
                 if(music.clip != mainTheme)
+                {
                     music.clip = mainTheme;
+                    music.Play();
+                }
                 break;
             case Music.NavTheme:
                 if(music.clip != navTheme)
+                {
                     music.clip = navTheme;
+                    music.Play();
+                }
                 break;
             case Music.FightTheme:
                 if(music.clip != fightTheme)
+                {
                     music.clip = fightTheme;
+                    music.Play();
+                }
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(music), music, null);
