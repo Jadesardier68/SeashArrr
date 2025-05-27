@@ -126,6 +126,7 @@ MonoBehaviour:
   BoostPower: 0
   isBoosted: 0
   type: 1
+  portraitSpriteName: Calamar
   allPlayers: []
   statsManager: {fileID: 0}
   HP: 0

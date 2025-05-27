@@ -15,6 +15,9 @@ public class Battle_Handler : MonoBehaviour
     public bool isTurnOver = false;
     public StatsManager statsManager;
     private bool fightStarted = false;
+    public GameObject ordrePanel4;
+    public GameObject ordrePanel5;
+    public GameObject ordrePanel6;
     public UIManager UIManager;
 
     void Start()
@@ -40,12 +43,12 @@ public class Battle_Handler : MonoBehaviour
         Players.Clear();
         Ennemies.Clear();
 
-
         Players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
         GenerateEnemies();
-
         BuildTurnOrder();
+        UpdateOrderPanel(); // ⬅️ Appel ici
+
         StartCoroutine(BattleLoop());
     }
 
@@ -276,4 +279,30 @@ public class Battle_Handler : MonoBehaviour
 
         isTurnOver = true;
     }
+
+    private void UpdateOrderPanel()
+    {
+        ordrePanel4.SetActive(false);
+        ordrePanel5.SetActive(false);
+        ordrePanel6.SetActive(false);
+
+        int count = turnOrder.Count;
+
+        switch (count)
+        {
+            case 4:
+                ordrePanel4.SetActive(true);
+                break;
+            case 5:
+                ordrePanel5.SetActive(true);
+                break;
+            case 6:
+                ordrePanel6.SetActive(true);
+                break;
+            default:
+                Debug.LogWarning($"Aucun panel défini pour {count} unités dans le tour.");
+                break;
+        }
+    }
+
 }

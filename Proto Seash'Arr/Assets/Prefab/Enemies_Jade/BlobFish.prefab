@@ -126,6 +126,7 @@ MonoBehaviour:
   BoostPower: 15
   isBoosted: 0
   type: 2
+  portraitSpriteName: Blobfish
   allPlayers: []
   statsManager: {fileID: 0}
   HP: 0

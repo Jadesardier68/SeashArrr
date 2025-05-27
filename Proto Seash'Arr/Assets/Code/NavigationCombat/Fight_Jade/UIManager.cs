@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [Header("Panels")]
-    public GameObject ordrePanel;
     public GameObject actionPanel;
     public GameObject targetPanel;
 

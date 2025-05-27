@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
 
     public bool isBoosted;
     public Type type;
+    public string portraitSpriteName;
 
 
     private Player player;

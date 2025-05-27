@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public Role role;
     public GameObject CaptainPrefab;
     public GameObject DoctorPrefab;
+    public string portraitSpriteName;
 
     public int HP;
 
@@ -113,6 +114,7 @@ public class Player : MonoBehaviour
             HealPower = 50;
             BoostPower = 0.5f;
             FixPower = 100;
+            portraitSpriteName = "cAPITAINE";
             }
         if (roleIndex == 2) // Doctor
         {
@@ -122,6 +124,7 @@ public class Player : MonoBehaviour
             HealPower = 100;
             BoostPower = 0f;
             FixPower = 100;
+            portraitSpriteName = "Médecin";
         }
     }
 

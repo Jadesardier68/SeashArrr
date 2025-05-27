@@ -194,7 +194,6 @@ public class StatsManager : MonoBehaviour
                 sliderNavigation.SetActive(false);
                 LancementFight = rnd.Next(TempsMinBeforeFight, TempsMaxBeforeFight);
                 TempsCombat = 0;
-                UIManager.ordrePanel.SetActive(true);
             }
 
             GérerAffichagePopUps();

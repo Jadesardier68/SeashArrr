@@ -126,6 +126,7 @@ MonoBehaviour:
   BoostPower: 0
   isBoosted: 0
   type: 3
+  portraitSpriteName: "M\xE9duse"
   allPlayers: []
   statsManager: {fileID: 0}
   HP: 0
