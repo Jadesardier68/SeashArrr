@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class Battle_Handler : MonoBehaviour
@@ -286,23 +287,63 @@ public class Battle_Handler : MonoBehaviour
         ordrePanel5.SetActive(false);
         ordrePanel6.SetActive(false);
 
+        GameObject activePanel = null;
         int count = turnOrder.Count;
 
-        switch (count)
+        if (count == 4)
+            activePanel = ordrePanel4;
+        else if (count == 5)
+            activePanel = ordrePanel5;
+        else if (count == 6)
+            activePanel = ordrePanel6;
+        else
         {
-            case 4:
-                ordrePanel4.SetActive(true);
-                break;
-            case 5:
-                ordrePanel5.SetActive(true);
-                break;
-            case 6:
-                ordrePanel6.SetActive(true);
-                break;
-            default:
-                Debug.LogWarning($"Aucun panel défini pour {count} unités dans le tour.");
-                break;
+            Debug.LogWarning($"Aucun panel défini pour {count} unités dans le tour.");
+            return;
+        }
+
+        activePanel.SetActive(true);
+
+        for (int i = 0; i < activePanel.transform.childCount; i++)
+        {
+            Transform child = activePanel.transform.GetChild(i);
+            Image portraitImage = child.GetComponent<Image>();
+
+            if (i < turnOrder.Count)
+            {
+                GameObject unit = turnOrder[i];
+                string spriteName = "";
+
+                if (unit.CompareTag("Player"))
+                {
+                    Player p = unit.GetComponent<Player>();
+                    spriteName = p.portraitSpriteName;
+                }
+                else if (unit.CompareTag("Enemy"))
+                {
+                    Enemy e = unit.GetComponent<Enemy>();
+                    spriteName = e.portraitSpriteName;
+                }
+
+                Sprite portrait = Resources.Load<Sprite>($"Sprites/Portraits/{spriteName}");
+
+                if (portrait != null)
+                {
+                    portraitImage.sprite = portrait;
+                    portraitImage.enabled = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"Portrait non trouvé pour : {spriteName}");
+                    portraitImage.enabled = false;
+                }
+            }
+            else
+            {
+                portraitImage.enabled = false;
+            }
         }
     }
+
 
 }
