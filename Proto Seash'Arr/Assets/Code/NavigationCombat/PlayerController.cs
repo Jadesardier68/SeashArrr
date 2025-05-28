@@ -6,16 +6,16 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     private Vector2 movementInput;
     public float health = 100f;
-    private PlayerInput playerInput;
+    private PlayerInput playerInput; 
 
     private void OnEnable()
     {
-        playerInput = GetComponent<PlayerInput>();  // On obtient le PlayerInput attaché au clone
+        playerInput = GetComponent<PlayerInput>();  // On obtient le PlayerInput attachï¿½ au clone
 
-        // Le système d'input est activé pour ce joueur spécifique
-        playerInput.actions.Enable();  // Assurer que les actions de ce joueur soient activées
+        // Le systï¿½me d'input est activï¿½ pour ce joueur spï¿½cifique
+        playerInput.actions.Enable();  // Assurer que les actions de ce joueur soient activï¿½es
 
-        // L'action de déplacement est assignée spécifiquement à ce joueur
+        // L'action de dï¿½placement est assignï¿½e spï¿½cifiquement ï¿½ ce joueur
         playerInput.actions["Move"].performed += Move;
         playerInput.actions["Move"].canceled += StopMoving;
     }
@@ -42,6 +42,6 @@ public class PlayerController : MonoBehaviour
 
     private void StopMoving(InputAction.CallbackContext context)
     {
-        movementInput = Vector2.zero;  // Réinitialiser à zéro quand le joueur arrête de bouger
+        movementInput = Vector2.zero;  // Rï¿½initialiser ï¿½ zï¿½ro quand le joueur arrï¿½te de bouger
     }
 }

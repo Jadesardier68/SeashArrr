@@ -1055,6 +1055,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 58a35a5e-2152-4515-953d-ed09260dc7d2
     m_ActionName: Parameters/Retour[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c6024ca-98bd-462a-a929-b3848a392ea8
+    m_ActionName: GamePlayFight/Attaquer
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4bd49797-662f-40dc-9393-f8a47927a384
+    m_ActionName: GamePlayFight/Canon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0589b5e0-6d92-4610-83e4-d0ec4119e2a5
+    m_ActionName: "GamePlayFight/R\xE9parer"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 413606ed-8a70-494d-842e-091e9d4acdec
+    m_ActionName: GamePlayFight/Soigner
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameplayNavigation
@@ -1120,9 +1136,50 @@ MonoBehaviour:
   BoostPower: 0
   FixPower: 0
   UIManager: {fileID: 0}
+  statsManager: {fileID: 0}
+  battleHandler: {fileID: 0}
+  isBoosted: 0
   role: 0
   CaptainPrefab: {fileID: 0}
   DoctorPrefab: {fileID: 0}
+  portraitSpriteName: 
+  HP: 0
+  AttackInput:
+    m_Name: Attack Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a928eab2-9476-4bf1-92b7-073c0b4337dd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  HealInput:
+    m_Name: Heal Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 75482a41-f398-447b-b99a-6b65aa441859
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonInput:
+    m_Name: Canon Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dfd66593-b4a5-4886-b770-ad094401e981
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  BoatFixInput:
+    m_Name: Boat Fix Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 53e06f58-6b4b-47fd-9236-1e04c0abe029
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &1845849116676902247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,6 +1197,7 @@ MonoBehaviour:
   PanelTableIngenieur: {fileID: 6556346863670178257}
   PanelPiqueNique: {fileID: 694287699340934172}
   PanelCanon: {fileID: 1867411938117069392}
+  PanelAncre: {fileID: 0}
   CuisineSlider: {fileID: 8407913420553139635}
   IngeniorSlider: {fileID: 4836145193157928823}
   PiqueNiqueSlider: {fileID: 247029898080251382}
@@ -1182,6 +1240,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 0c748dde-9b55-45e3-92c5-009f32031ed5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AncreToggle:
+    m_Name: Ancre Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 35867699-2f61-483d-9c31-5cc371a55b77
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
