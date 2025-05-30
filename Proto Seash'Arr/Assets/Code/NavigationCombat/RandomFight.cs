@@ -17,7 +17,7 @@ public class RandomFight : MonoBehaviour
 
     [Space(20)]
 
-    // Random et switch entre caméras
+    // Random et switch entre camï¿½ras
     [Header("Temps avant le switch de camera")]
     public int LancementFight;
     public int LancementNavig = 10;
@@ -26,10 +26,10 @@ public class RandomFight : MonoBehaviour
     //Etat de jeu
     [Header("Etat des phases")]
     public bool Navigation = true;
-    public bool Fight = false;
+    public static bool Fight = false;
     [Space(20)]
 
-    // Objets à toggle
+    // Objets ï¿½ toggle
     [Header("Objets Toggle")]
     public GameObject CameraFight;
     public GameObject CameraNavigation;
@@ -60,10 +60,10 @@ public class RandomFight : MonoBehaviour
                 CameraFight.SetActive(!CameraFight.activeSelf);
                 UI.SetActive(!UI.activeSelf);
 
-                // Réinitialiser TempsNavigation pour arrêter le timer
+                // Rï¿½initialiser TempsNavigation pour arrï¿½ter le timer
                 TempsNavigation = 0;
 
-                // Redéfinir Lancement pour le prochain combat aléatoire
+                // Redï¿½finir Lancement pour le prochain combat alï¿½atoire
                 LancementFight = rnd.Next(TempsMinNavigation, TempsMaxNavigation);
 
             }
@@ -82,7 +82,7 @@ public class RandomFight : MonoBehaviour
                CameraFight.SetActive(!CameraFight.activeSelf);
                UI.SetActive(!UI.activeSelf);
 
-                // Réinitialiser TempsFight pour arrêter le timer
+                // Rï¿½initialiser TempsFight pour arrï¿½ter le timer
                 TempsFight = 0;
             }
         }
