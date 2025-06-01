@@ -9,6 +9,7 @@ public class Battle_Handler : MonoBehaviour
     [HideInInspector] public List<GameObject> Players = new List<GameObject>();
     [HideInInspector] public List<GameObject> Ennemies = new List<GameObject>();
     [HideInInspector] public List<GameObject> turnOrder = new List<GameObject>();
+    public List<Transform> playerPlaceholders;
     [HideInInspector] public GameObject currentUnit;
     public GameObject[] BanqueEnnemies;
     private int currentTurnIndex = 0;
@@ -51,6 +52,54 @@ public class Battle_Handler : MonoBehaviour
         UpdateOrderPanel(); // ⬅️ Appel ici
 
         StartCoroutine(BattleLoop());
+
+        for (int i = 0; i < Players.Count && i < playerPlaceholders.Count; i++)
+        {
+            Transform modele3D = Players[i].transform.GetComponentInChildren<Transform>(true);
+            foreach (Transform child in Players[i].GetComponentsInChildren<Transform>())
+            {
+                if (child.CompareTag("Modele3D"))
+                {
+                    modele3D = child;
+                    break;
+                }
+            }
+
+            if (modele3D != null)
+            {
+                // Position absolue du Modele3D sur le placeholder
+                modele3D.position = playerPlaceholders[i].position;
+
+                // Bloquer le Rigidbody du Modele3D
+                Rigidbody rbChild = modele3D.GetComponent<Rigidbody>();
+                if (rbChild != null)
+                {
+                    rbChild.isKinematic = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"Pas de Rigidbody sur le Modele3D : {modele3D.name}");
+                }
+
+                // Bloquer le Rigidbody du Player (parent)
+                Rigidbody rbParent = Players[i].GetComponent<Rigidbody>();
+                if (rbParent != null)
+                {
+                    rbParent.isKinematic = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"Pas de Rigidbody sur le Player : {Players[i].name}");
+                }
+
+                Debug.Log($"Modele3D '{modele3D.name}' et son parent '{Players[i].name}' placés et figés.");
+            }
+            else
+            {
+                Debug.LogWarning($"Modele3D introuvable dans {Players[i].name}");
+            }
+        }
+
     }
 
     private void BuildTurnOrder()
@@ -91,11 +140,11 @@ public class Battle_Handler : MonoBehaviour
         int enemyCount;
 
         if (statsManager.TimerTotal < 300)
-            enemyCount = 3;
+            enemyCount = 1;
         else if (statsManager.TimerTotal < 600)
-            enemyCount = 4;
+            enemyCount = 2;
         else
-            enemyCount = 5;
+            enemyCount = 3;
 
         HashSet<int> selectedIndices = new HashSet<int>();
 

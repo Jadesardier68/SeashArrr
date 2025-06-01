@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - BattleManager
   - PanelChoixCombat
+  - Modele3D
   layers:
   - Default
   - TransparentFX

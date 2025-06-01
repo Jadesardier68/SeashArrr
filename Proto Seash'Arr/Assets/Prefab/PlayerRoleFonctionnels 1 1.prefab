@@ -9005,7 +9005,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!114 &1257252035097032543
 MonoBehaviour:
@@ -9032,6 +9032,7 @@ MonoBehaviour:
   role: 1
   CaptainPrefab: {fileID: 6421574827724789598}
   DoctorPrefab: {fileID: 7832939589078253872}
+  portraitSpriteName: 
   HP: 0
   AttackInput:
     m_Name: Attack Input
@@ -9704,7 +9705,7 @@ GameObject:
   - component: {fileID: 3719775707546105109}
   m_Layer: 0
   m_Name: Captain
-  m_TagString: Untagged
+  m_TagString: Modele3D
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9719,7 +9720,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -199.68, y: -109, z: -0.040662}
-  m_LocalScale: {x: 1.2033, y: 1.2033, z: 1.2033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 231246747002028510}
@@ -9734,7 +9735,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6421574827724789598}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 5626925631471267929, guid: 8645cfe3e2606ac48b5766e8d401d729, type: 3}
 --- !u!23 &2506652683346278620
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9755,7 +9756,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 130ff07c9b5e42e43b4604ef870cb07f, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12030,7 +12031,7 @@ GameObject:
   - component: {fileID: 1260767275132065081}
   m_Layer: 0
   m_Name: Doctor
-  m_TagString: Untagged
+  m_TagString: Modele3D
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
