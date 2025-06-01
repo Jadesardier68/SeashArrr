@@ -45,7 +45,6 @@ public class Anim_Nav : MonoBehaviour
         
         playerInput.actions["Attaquer"].performed += Attaquer;
         playerInput.actions["Soigner"].performed += Soigner;
-        playerInput.actions["Canon"].started += CanonCombat;
         playerInput.actions["Réparer"].performed += Reparer;
     }
 

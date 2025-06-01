@@ -388,9 +388,89 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 42ab8c5a-669b-4f9c-a268-4bd1e48c2588
     m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7cf6dd0-46c7-4630-a502-0de07819136b
+    m_ActionName: GameplayNavigation/InteractPiqueNique
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1c19ab2c-0fbd-4742-a135-7389c737ffe2
+    m_ActionName: GameplayNavigation/InteractCanon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5aaa1421-8f3d-4f0c-9400-65b66c1d21fa
+    m_ActionName: GameplayNavigation/InteractIngenior
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 516ca111-8ad1-48b2-a3e9-51b339a378a2
+    m_ActionName: GameplayNavigation/InteractKitchen
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2d98e412-a4d7-4039-9a83-62b144bb1850
+    m_ActionName: CharacterChoice/Left
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 77de6216-5287-4932-b06f-5a19d2e2226b
+    m_ActionName: CharacterChoice/Right
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 028552dd-14cf-4ff0-a0ce-77c19cd7ee2c
+    m_ActionName: CharacterChoice/Valider
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a548bdf6-e7d2-4ac0-bc7a-78a1b0bb3d66
+    m_ActionName: CharacterChoice/Annuler
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e1c08d01-7443-444e-b734-0e58e9016200
+    m_ActionName: CharacterChoice/ValiderFinal
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 50d8c247-7dcc-40bb-aa0c-15a84ab464c4
+    m_ActionName: Cuisine/CuisinerRagout
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 851a40b2-d92b-4808-9ed1-d07f5a1979e1
+    m_ActionName: Cuisine/CuisinerRhum
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 730f50e5-f0f0-4b02-b16c-6b341a3ffeb5
+    m_ActionName: PiqueNique/Manger
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb9a845c-135a-43e5-a038-8c6098986e16
+    m_ActionName: Canon/RepCanon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2214f55f-cb23-49e1-9d6f-07df7e5e2a8d
+    m_ActionName: Ingenior/AmeBateau
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e009ccda-e0fe-41c1-8678-e5fbabd6b09c
+    m_ActionName: Ingenior/AmeCanon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58a35a5e-2152-4515-953d-ed09260dc7d2
+    m_ActionName: Parameters/Retour
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c6024ca-98bd-462a-a929-b3848a392ea8
+    m_ActionName: GamePlayFight/Attaquer
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4bd49797-662f-40dc-9393-f8a47927a384
+    m_ActionName: GamePlayFight/Canon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0589b5e0-6d92-4610-83e4-d0ec4119e2a5
+    m_ActionName: "GamePlayFight/R\xE9parer"
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 413606ed-8a70-494d-842e-091e9d4acdec
+    m_ActionName: GamePlayFight/Soigner
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: GameplayNavigation
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &6346572902971933535
@@ -446,12 +526,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3efd2de4cb6294288783e4b40ad184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharactersRoles:
-  - {fileID: 2100000, guid: 130ff07c9b5e42e43b4604ef870cb07f, type: 2}
-  - {fileID: 2100000, guid: 2c33558c2839e31499cbc019c966a4d5, type: 2}
-  - {fileID: 2100000, guid: 425782d69875a95428097c9025c9c0f6, type: 2}
   HPMax: 100
+  ATT: 0
+  CanonPower: 0
+  HealPower: 0
+  BoostPower: 0
+  FixPower: 0
+  UIManager: {fileID: 0}
+  statsManager: {fileID: 0}
+  battleHandler: {fileID: 0}
+  isBoosted: 0
   role: 0
+  CaptainPrefab: {fileID: 0}
+  DoctorPrefab: {fileID: 0}
+  portraitSpriteName: 
+  HP: 0
+  AttackInput:
+    m_Name: Attack Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a4fb2ab9-e402-4555-9219-812103ee2a28
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  HealInput:
+    m_Name: Heal Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 23a912f4-6ba9-4c77-9546-010143826f4a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonInput:
+    m_Name: Canon Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1bafb3ae-26d2-491d-8f2f-7579be3a9154
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  BoatFixInput:
+    m_Name: Boat Fix Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d39172e4-5d03-499d-a209-700558330c46
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &543447911010556244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,3 +594,59 @@ MonoBehaviour:
   PanelTableIngenieur: {fileID: 0}
   PanelPiqueNique: {fileID: 0}
   PanelCanon: {fileID: 0}
+  PanelAncre: {fileID: 0}
+  CuisineSlider: {fileID: 0}
+  IngeniorSlider: {fileID: 0}
+  PiqueNiqueSlider: {fileID: 0}
+  CanonSlider: {fileID: 0}
+  cuisineActive: 0
+  tableIngenieurActive: 0
+  canonActive: 0
+  piqueNiqueActive: 0
+  ancreActive: 0
+  inputActionAsset: {fileID: 0}
+  InteractKitchen:
+    m_Name: Interact Kitchen
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b9536342-0d1c-4daa-b44f-ecaefdd186af
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  CanonToggle:
+    m_Name: Canon Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d01cc4bf-b731-42f8-9812-bd3362d4e459
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  IngeniorToggle:
+    m_Name: Ingenior Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d003752a-d9a7-4109-9bac-c28c4c0d402a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  PiqueNiqueToggle:
+    m_Name: Pique Nique Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cacd2ede-cb4b-4984-8ad7-ed542962ebd6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  AncreToggle:
+    m_Name: Ancre Toggle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d7ecc7cc-bd88-410a-bb28-49e3f156f240
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
