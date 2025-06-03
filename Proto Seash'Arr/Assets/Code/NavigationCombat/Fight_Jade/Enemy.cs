@@ -91,6 +91,14 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         Debug.Log($"{name} est mort.");
+
+        Battle_Handler handler = FindObjectOfType<Battle_Handler>();
+        if (handler != null)
+        {
+            handler.Ennemies.Remove(gameObject);
+            handler.turnOrder.Remove(gameObject);
+        }
+
         Destroy(gameObject);
     }
 

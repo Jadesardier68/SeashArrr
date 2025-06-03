@@ -176,8 +176,8 @@ public class Battle_Handler : MonoBehaviour
                 Debug.Log("Battle Over!");
                 isBattleOver = true;
                 fightStarted = false;
+                CleanupBattle();
                 yield break;
-
             }
 
             else if (statsManager.boatHealth <= 0)
@@ -185,11 +185,23 @@ public class Battle_Handler : MonoBehaviour
                 Debug.Log("Battle Over!");
                 isBattleOver = true;
                 fightStarted = false;
+                CleanupBattle();
                 yield break;
             }
 
 
             currentUnit = turnOrder[currentTurnIndex];
+
+            currentUnit = turnOrder[currentTurnIndex];
+
+            // Sauter les unités nulles ou détruites
+            if (currentUnit == null)
+            {
+                turnOrder.RemoveAt(currentTurnIndex);
+                currentTurnIndex = currentTurnIndex % turnOrder.Count;
+                continue;
+            }
+
             yield return StartCoroutine(ShowTurnText(currentUnit));
             Debug.Log(turnOrder[currentTurnIndex] + "joue");
             isTurnOver = false;
@@ -357,6 +369,37 @@ public class Battle_Handler : MonoBehaviour
         }
 
         isTurnOver = true;
+    }
+
+    private void CleanupBattle()
+    {
+        Debug.Log("Nettoyage du combat...");
+
+        StopAllCoroutines(); // Arrête toute coroutine en cours (utile si des attaques sont encore en train de se jouer)
+
+        foreach (GameObject enemy in Ennemies)
+        {
+            if (enemy != null)
+                Destroy(enemy);
+        }
+
+        Ennemies.Clear();
+        Players.Clear();
+        turnOrder.Clear();
+
+        currentUnit = null;
+        currentTurnIndex = 0;
+        isTurnOver = false;
+        isBattleOver = false;
+        fightStarted = false;
+        statsManager.Fight = false;
+        statsManager.Navigation = true;
+
+
+        // Facultatif : cacher l'UI du combat, réactiver la navigation, etc.
+        // Exemple :
+        // UIManager.HideBattleUI();
+        // GameManager.Instance.EnableNavigation();
     }
 
     /*private void UpdateOrderPanel()
