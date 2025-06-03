@@ -306,13 +306,13 @@ public class Battle_Handler : MonoBehaviour
                 yield return enemy.CanonBoatAttack();
                 break;
 
-           /* case Enemy.Type.Healer:
-                int choice = Random.Range(0, 3);
+            case Enemy.Type.Healer:
+                int choice = Random.Range(0, 1);
                 if (choice == 0) enemy.Heal();
                 else if (choice == 1) enemy.Boost();
                 // Si tu veux, tu peux activer ça aussi :
                 // else yield return enemy.Attack();
-                break;*/
+                break;
           
             case Enemy.Type.AOE:
                 yield return enemy.AllAttack(); // attendre fin anim

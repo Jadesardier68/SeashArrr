@@ -186,19 +186,43 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Attack", false);
     }
 
-    public void Heal()
+    public IEnumerator Heal()
     {
+        if (animator == null)
+        {
+            Debug.LogError("Animator est null !");
+            yield break;
+        }
+
+        animator.SetBool("Attack", true);
+
         HP = Mathf.Min(HP + HealPower, HPMax);
         Debug.Log(name + " s'est soigné pour " + HealPower + " HP. Total: " + HP);
+
+        yield return new WaitForSeconds(0.5f); // attendre fin animation
+
+        animator.SetBool("Attack", false);
     }
 
-    public void Boost()
+    public IEnumerator Boost()
     {
+        if (animator == null)
+        {
+            Debug.LogError("Animator est null !");
+            yield break;
+        }
+
+        animator.SetBool("Attack", true);
+
         if (!isBoosted)
         {
             isBoosted = true;
             ATT += BoostPower;
             Debug.Log(name + " a été boosté. Nouvelle ATT: " + ATT);
         }
+
+        yield return new WaitForSeconds(0.5f); // attendre fin animation
+
+        animator.SetBool("Attack", false);
     }
 }
