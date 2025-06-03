@@ -42,6 +42,8 @@ public class StatsManager : MonoBehaviour
     public Slider slider;
     public GameObject sliderNavigation;
     public Battle_Handler battleHandler;
+    public GameObject CanonVieFight;
+    public GameObject canonHealthGO;
 
     [Header("Statistiques")]
     public int boatHealth;
@@ -62,6 +64,7 @@ public class StatsManager : MonoBehaviour
     public TMP_Text nbrFoodText;
     public TMP_Text nbrRhumText;
     public TMP_Text nbrRagoutText;
+    public TMP_Text canonHealthTextFight;
 
     [Header("Iles")]
     public Button Boat;
@@ -160,7 +163,7 @@ public class StatsManager : MonoBehaviour
     public void UpdateText()
     {
         boatHealthText.text = boatHealth + " / " + boatMaxHealth;
-        canonHealthText.text = canonHealth + " / " + canonMaxHealth;
+        canonHealthTextFight.text = canonHealthText.text = canonHealth + " / " + canonMaxHealth;
         nbrWoodText.text = nbrWood + "";
         nbrIronText.text = nbrIron + "";
         nbrFoodText.text = nbrFood + "";
@@ -190,6 +193,8 @@ public class StatsManager : MonoBehaviour
                 Fight = true;
                 CameraNavigation.SetActive(false);
                 CameraFight.SetActive(true);
+                CanonVieFight.SetActive(true);
+                canonHealthGO.SetActive(false);
                 slider.value = TempsNavigation;
                 TempsNavigation = TempsNavigation;
                 TimerTotal = TimerTotal;
@@ -241,6 +246,7 @@ public class StatsManager : MonoBehaviour
                 Navigation = true;
                 battleHandler.isBattleOver = false;
                 CameraFight.SetActive(false);
+                CanonVieFight.SetActive(false);
                 CameraNavigation.SetActive(true);
                 sliderNavigation.SetActive(true);
             }

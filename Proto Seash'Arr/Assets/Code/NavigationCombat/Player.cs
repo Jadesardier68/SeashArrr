@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
             HealPower = 50;
             BoostPower = 0.5f;
             FixPower = 100;
-            portraitSpriteName = "cAPITAINE";
+            portraitSpriteName = "Capitaine";
             }
         if (roleIndex == 2) // Doctor
         {

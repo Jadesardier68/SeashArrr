@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Battle_Handler : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Battle_Handler : MonoBehaviour
     public bool isTurnOver = false;
     public StatsManager statsManager;
     private bool fightStarted = false;
+
+    public GameObject turnPopupTextObject;
+    public TextMeshProUGUI turnPopupText;
+
     /*public GameObject ordrePanel4;
     public GameObject ordrePanel5;
     public GameObject ordrePanel6;*/
@@ -185,6 +190,7 @@ public class Battle_Handler : MonoBehaviour
 
 
             currentUnit = turnOrder[currentTurnIndex];
+            yield return StartCoroutine(ShowTurnText(currentUnit));
             Debug.Log(turnOrder[currentTurnIndex] + "joue");
             isTurnOver = false;
 
@@ -292,6 +298,30 @@ public class Battle_Handler : MonoBehaviour
 
         isTurnOver = true;
     }
+
+    private IEnumerator ShowTurnText(GameObject unit)
+    {
+        string unitName = "";
+
+        if (unit.CompareTag("Player"))
+        {
+            Player p = unit.GetComponent<Player>();
+            unitName = p.portraitSpriteName;
+        }
+        else if (unit.CompareTag("Enemy"))
+        {
+            Enemy e = unit.GetComponent<Enemy>();
+            unitName = e.portraitSpriteName;
+        }
+
+        turnPopupText.text = $"{unitName} commence à jouer";
+        turnPopupTextObject.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        turnPopupTextObject.SetActive(false);
+    }
+
     private IEnumerator EnemyTurn(Enemy enemy)
     {
         yield return new WaitForSeconds(1f); // temps de réflexion
