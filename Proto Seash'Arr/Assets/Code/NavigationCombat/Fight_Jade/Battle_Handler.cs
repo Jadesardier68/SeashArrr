@@ -17,16 +17,15 @@ public class Battle_Handler : MonoBehaviour
     public bool isTurnOver = false;
     public StatsManager statsManager;
     private bool fightStarted = false;
-    public GameObject ordrePanel4;
+    /*public GameObject ordrePanel4;
     public GameObject ordrePanel5;
-    public GameObject ordrePanel6;
+    public GameObject ordrePanel6;*/
     public UIManager UIManager;
 
     void Start()
     {
         Players.Clear();
         Ennemies.Clear();
-
     }
 
 
@@ -49,7 +48,7 @@ public class Battle_Handler : MonoBehaviour
 
         GenerateEnemies();
         BuildTurnOrder();
-        UpdateOrderPanel(); // ⬅️ Appel ici
+        //UpdateOrderPanel(); // ⬅️ Appel ici
 
         StartCoroutine(BattleLoop());
 
@@ -330,7 +329,7 @@ public class Battle_Handler : MonoBehaviour
         isTurnOver = true;
     }
 
-    private void UpdateOrderPanel()
+    /*private void UpdateOrderPanel()
     {
         ordrePanel4.SetActive(false);
         ordrePanel5.SetActive(false);
@@ -392,7 +391,7 @@ public class Battle_Handler : MonoBehaviour
                 portraitImage.enabled = false;
             }
         }
-    }
+    }*/
 
 
 }

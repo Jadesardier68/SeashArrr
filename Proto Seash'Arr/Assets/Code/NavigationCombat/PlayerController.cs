@@ -8,10 +8,16 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movementInput;
     public PlayerInput playerInput;
+    public StatsManager statsmanager;
 
     private Rigidbody childRb;
 
     [SerializeField] private Transform childTransform; // assigné dans l’inspecteur ou trouvé dynamiquement
+
+    public void Start()
+    {
+        statsmanager = FindObjectOfType<StatsManager>();
+    }
 
     private void Awake()
     {
@@ -73,6 +79,16 @@ public class PlayerController : MonoBehaviour
             Quaternion targetRot = Quaternion.LookRotation(-moveDir);
             Quaternion newRot = Quaternion.RotateTowards(childRb.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);
             childRb.MoveRotation(newRot);
+        }
+
+        if(statsmanager.Fight == true)
+        {
+            speed = 0;
+        }
+
+        else
+        {
+            speed = 5;
         }
     }
 
