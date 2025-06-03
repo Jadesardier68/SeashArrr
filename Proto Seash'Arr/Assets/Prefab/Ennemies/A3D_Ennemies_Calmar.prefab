@@ -1727,6 +1727,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6309531320691593946}
+  - component: {fileID: -2060209985311822244}
+  - component: {fileID: -99479936344686835}
   m_Layer: 0
   m_Name: A3D_Ennemies_Calmar
   m_TagString: Untagged
@@ -1742,8 +1744,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8415026665939817471}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 398.47, y: 139.5, z: -935.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1751,6 +1753,51 @@ Transform:
   - {fileID: 8980288890512558534}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &-2060209985311822244
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8415026665939817471}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ade2e8aa6188d6a4681aeff59ef20dc3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-99479936344686835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8415026665939817471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afa106d9b1f14e46b95525c2a9028d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPMax: 100
+  ATT: 0
+  CanonBoatATT: 75
+  AllATT: 0
+  HealPower: 0
+  BoostPower: 0
+  isBoosted: 0
+  type: 1
+  portraitSpriteName: Calamar
+  allPlayers: []
+  statsManager: {fileID: 0}
+  HP: 0
 --- !u!1 &8417403207796710535
 GameObject:
   m_ObjectHideFlags: 0

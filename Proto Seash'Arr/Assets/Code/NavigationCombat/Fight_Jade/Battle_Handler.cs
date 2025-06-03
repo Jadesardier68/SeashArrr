@@ -295,36 +295,36 @@ public class Battle_Handler : MonoBehaviour
     }
     private IEnumerator EnemyTurn(Enemy enemy)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f); // temps de réflexion
 
         switch (enemy.type)
         {
-            case Enemy.Type.Fighter:
-                enemy.Attack();
-                break;
+           /* case Enemy.Type.Fighter:
+                yield return enemy.Attack(); // ATTENTION : doit retourner IEnumerator
+                break;*/
 
             case Enemy.Type.Destroyer:
-                enemy.CanonBoatAttack();
+                yield return enemy.CanonBoatAttack();
                 break;
 
-            case Enemy.Type.Healer:
+           /* case Enemy.Type.Healer:
                 int choice = Random.Range(0, 3);
                 if (choice == 0) enemy.Heal();
                 else if (choice == 1) enemy.Boost();
-                // else enemy.Attack();
-
-                break;
-
+                // Si tu veux, tu peux activer ça aussi :
+                // else yield return enemy.Attack();
+                break;*/
+          
             case Enemy.Type.AOE:
-                enemy.AllAttack();
+                yield return enemy.AllAttack(); // attendre fin anim
                 break;
 
-            case Enemy.Type.Boss:
+           /* case Enemy.Type.Boss:
                 choice = Random.Range(0, 3);
-                if (choice == 0) enemy.AllAttack();
-                else if (choice == 1) enemy.CanonBoatAttack();
-                else enemy.Attack();
-                break;
+                if (choice == 0) yield return enemy.AllAttack();
+                else if (choice == 1) yield return enemy.CanonBoatAttack();
+                else yield return enemy.Attack();
+                break;*/
         }
 
         isTurnOver = true;

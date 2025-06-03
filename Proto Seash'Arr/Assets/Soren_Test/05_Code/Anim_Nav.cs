@@ -6,13 +6,14 @@ using UnityEngine.InputSystem;
 public class Anim_Nav : MonoBehaviour
 {
   
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
     Animator animator;
     public bool cuisineActive; 
     public bool tableIngenieurActive;
     public bool canonActive;
     public bool piqueNiqueActive;
     public bool ancreActive;
+
     
     void Start()
     {
@@ -21,34 +22,34 @@ public class Anim_Nav : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput = GetComponent<PlayerInput>();
+        //playerInput = GetComponent<PlayerInput>();
         Debug.unityLogger.Log("Enable Animation Chara");
         
         //Move------------------------------------------
         playerInput.actions["Move"].performed += Move;
-        playerInput.actions["Move"].canceled += StopMoving;
+        playerInput.actions["Move"].canceled += ctx => StopMoving();
         //------------------------------------------------
-        
-        //Manger------------------------------------------
-        playerInput.actions["Manger"].started += Manger;
-        //------------------------------------------------
-        
-        //Cuisiner------------------------------------------
-        playerInput.actions["CuisinerRagout"].started += Cuisiner;
-        
-        //Canon------------------------------------------
-        playerInput.actions["RepCanon"].started += Canon;
 
-        //Inge------------------------------------------
-        playerInput.actions["AmeBateau"].started += Ingenieur;
-        
-        
-        playerInput.actions["Attaquer"].performed += Attaquer;
-        playerInput.actions["Soigner"].performed += Soigner;
-        playerInput.actions["Réparer"].performed += Reparer;
+        //Manger------------------------------------------
+        /* playerInput.actions["Manger"].started += Manger;
+         //------------------------------------------------
+
+         //Cuisiner------------------------------------------
+         playerInput.actions["CuisinerRagout"].started += Cuisiner;
+
+         //Canon------------------------------------------
+         playerInput.actions["RepCanon"].started += Canon;
+
+         //Inge------------------------------------------
+         playerInput.actions["AmeBateau"].started += Ingenieur;
+
+
+         playerInput.actions["Attaquer"].performed += Attaquer;
+         playerInput.actions["Soigner"].performed += Soigner;
+         playerInput.actions["Réparer"].performed += Reparer;*/
     }
 
-    private void Move(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context)
     {
         animator.SetBool("Cooking", false);
         animator.SetBool("Eat", false);
@@ -58,13 +59,13 @@ public class Anim_Nav : MonoBehaviour
         //Quand le perso marche ; se déplace
     }
 
-    private void StopMoving(InputAction.CallbackContext context)
+    public void StopMoving()
     {
         animator.SetBool("Move", false);
         //Quand le perso ne marche plus ; Idle
     }
 
-    private void Manger(InputAction.CallbackContext context)
+    public void Manger()
     {
         if (piqueNiqueActive)
         {
@@ -73,7 +74,7 @@ public class Anim_Nav : MonoBehaviour
         }
     }
 
-    private void Cuisiner(InputAction.CallbackContext context)
+    public void Cuisiner()
     {
         if (cuisineActive)
         {
@@ -82,7 +83,7 @@ public class Anim_Nav : MonoBehaviour
         }
     }
     
-    private void Canon(InputAction.CallbackContext context)
+    public void Canon()
     {
         if (canonActive)
         {
@@ -91,7 +92,7 @@ public class Anim_Nav : MonoBehaviour
         }
     }
     
-    private void Ingenieur(InputAction.CallbackContext context)
+    public void Ingenieur()
     {
         if (tableIngenieurActive)
         {
@@ -100,7 +101,7 @@ public class Anim_Nav : MonoBehaviour
         }
     }
 
-    private void Attaquer(InputAction.CallbackContext context)
+    public void Attaquer()
     {
         if (RandomFight.Fight == true)
         {
@@ -108,7 +109,7 @@ public class Anim_Nav : MonoBehaviour
         }
     }
 
-    private void Soigner(InputAction.CallbackContext context)
+    public void Soigner()
     {
         if (RandomFight.Fight == true)
         {
@@ -116,7 +117,7 @@ public class Anim_Nav : MonoBehaviour
         }
     }
     
-    private void Reparer(InputAction.CallbackContext context)
+    private void Reparer()
     {
         if (RandomFight.Fight == true)
         {

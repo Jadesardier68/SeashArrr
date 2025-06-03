@@ -4,44 +4,85 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
+    public float rotationSpeed = 720f;
+
     private Vector2 movementInput;
-    public float health = 100f;
-    private PlayerInput playerInput; 
+    public PlayerInput playerInput;
+
+    private Rigidbody childRb;
+
+    [SerializeField] private Transform childTransform; // assigné dans l’inspecteur ou trouvé dynamiquement
+
+    private void Awake()
+    {
+        if (childTransform == null)
+        {
+            // Essaie de trouver automatiquement un Rigidbody dans les enfants
+            childRb = GetComponent<Rigidbody>();
+            if (childRb != null)
+                childTransform = childRb.transform;
+        }
+        else
+        {
+            childRb = childTransform.GetComponent<Rigidbody>();
+        }
+
+        if (childRb == null)
+        {
+            Debug.LogError("❌ Aucun Rigidbody trouvé sur l'enfant !");
+        }
+    }
 
     private void OnEnable()
     {
-        playerInput = GetComponent<PlayerInput>();  // On obtient le PlayerInput attach� au clone
+        playerInput = GetComponentInParent<PlayerInput>();
 
-        // Le syst�me d'input est activ� pour ce joueur sp�cifique
-        playerInput.actions.Enable();  // Assurer que les actions de ce joueur soient activ�es
+        if (playerInput == null)
+        {
+            Debug.LogWarning("❗ PlayerInput non trouvé sur ce GameObject.");
+            return;
+        }
 
-        // L'action de d�placement est assign�e sp�cifiquement � ce joueur
+        playerInput.actions.Enable();
         playerInput.actions["Move"].performed += Move;
         playerInput.actions["Move"].canceled += StopMoving;
     }
-
     private void OnDisable()
     {
+        if (playerInput == null) return;
+
         playerInput.actions["Move"].performed -= Move;
         playerInput.actions["Move"].canceled -= StopMoving;
 
         playerInput.actions.Disable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        // Appliquer les mouvements seulement sur l'axe X et Y
-        Vector3 moveVector = new Vector3(movementInput.x, 0, movementInput.y) * speed * Time.deltaTime;
-        transform.Translate(moveVector, Space.World);
+        if (childRb == null) return;
+
+        Vector3 moveDir = new Vector3(-movementInput.y, 0f, movementInput.x);
+
+        // Mouvement
+        Vector3 targetPos = childRb.position + moveDir * speed * Time.fixedDeltaTime;
+        childRb.MovePosition(targetPos);
+
+        // Rotation
+        if (moveDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(-moveDir);
+            Quaternion newRot = Quaternion.RotateTowards(childRb.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);
+            childRb.MoveRotation(newRot);
+        }
     }
 
     private void Move(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();  // Lire les inputs pour le mouvement
+        movementInput = context.ReadValue<Vector2>();
     }
 
     private void StopMoving(InputAction.CallbackContext context)
     {
-        movementInput = Vector2.zero;  // R�initialiser � z�ro quand le joueur arr�te de bouger
+        movementInput = Vector2.zero;
     }
 }

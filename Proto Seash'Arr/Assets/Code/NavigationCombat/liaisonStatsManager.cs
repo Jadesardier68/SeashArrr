@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,14 +16,28 @@ public class liaisonStatsManager : MonoBehaviour
     public InputAction AmeBateau;
     public InputAction AmeCanon;
 
+    public Anim_Nav animationPlayer;
+
     void Start()
     {
-        GameObject statsManagerObject = GameObject.FindGameObjectWithTag("StatsManager");
+        if (animationPlayer == null)
+        {
+            animationPlayer = FindObjectOfType<Anim_Nav>(); // ⚠️ Attention : prend le **premier** trouvé
+            if (animationPlayer == null)
+            {
+                Debug.LogError("Anim_Nav not found in scene! LiaisonStatsManager needs it.");
+            }
+        }
 
+        GameObject statsManagerObject = GameObject.FindGameObjectWithTag("StatsManager");
         if (statsManagerObject != null)
         {
             statsManager = statsManagerObject.GetComponent<StatsManager>();
             useAtelier = statsManagerObject.GetComponent<UseAtelier>();
+        }
+        else
+        {
+            Debug.LogWarning("StatsManager not found with tag.");
         }
     }
 
@@ -65,7 +79,10 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelTableIngenieur.activeSelf && useAtelier != null)
         {
+            animationPlayer.tableIngenieurActive = true;
+            animationPlayer.Ingenieur();
             useAtelier.AmeliorationBateau();
+            animationPlayer.StopMoving();
         }
     }
 
@@ -73,7 +90,10 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelTableIngenieur.activeSelf && useAtelier != null)
         {
+            animationPlayer.tableIngenieurActive = true;
+            animationPlayer.Ingenieur();
             useAtelier.AmeliorationCanon();
+            animationPlayer.StopMoving();
         }
     }
 
@@ -81,7 +101,10 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelPiqueNique.activeSelf && useAtelier != null)
         {
+            animationPlayer.piqueNiqueActive = true;
+            animationPlayer.Manger();
             useAtelier.Manger();
+            animationPlayer.StopMoving();
         }
     }
 
@@ -89,7 +112,10 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelCanon.activeSelf && useAtelier != null)
         {
+            animationPlayer.canonActive = true;
+            animationPlayer.Canon();
             useAtelier.ReparerCanon();
+            animationPlayer.StopMoving();
         }
     }
 
@@ -97,7 +123,10 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelCuisine.activeSelf && useAtelier != null)
         {
+            animationPlayer.cuisineActive = true;
+            animationPlayer.Cuisiner();
             useAtelier.CuisinerRagout();
+            animationPlayer.StopMoving();
         }
     }
 
@@ -105,7 +134,10 @@ public class liaisonStatsManager : MonoBehaviour
     {
         if (atelierManager.PanelCuisine.activeSelf && useAtelier != null)
         {
+            animationPlayer.cuisineActive = true;
+            animationPlayer.Cuisiner();
             useAtelier.CuisinerRhum();
+            animationPlayer.StopMoving();
         }
     }
 }

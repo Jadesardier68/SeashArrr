@@ -34,11 +34,18 @@ public class Enemy : MonoBehaviour
     private Player player;
     public List<Player> allPlayers;
     public StatsManager statsManager;
+    Animator animator;
     
 
     public int HP;
 
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+        // ou : animator = GetComponentInChildren<Animator>();
+    }
     void Start()
     {
         // Initialisation de la liste des joueurs présents dans la scène
@@ -98,25 +105,40 @@ public class Enemy : MonoBehaviour
 
         Debug.Log("Le joueur " + target.name + " a été attaqué pour " + ATT);
     }
-    public void CanonBoatAttack()
+    public IEnumerator CanonBoatAttack()
     {
         var focus = Random.Range(1, 4);
 
+        if (animator == null)
+        {
+            Debug.LogError("Animator est null !");
+            yield break;
+        }
+
         if (focus <= 3)
         {
+            animator.SetBool("attack", true);
+            yield return new WaitForSeconds(0.5f); // temps avant impact
             statsManager.boatHealth-=CanonBoatATT;
             statsManager.UpdateText();
         }
         else
         {
+            animator.SetBool("attack", true);
+            yield return new WaitForSeconds(0.5f); // temps avant impact
             statsManager.canonHealth -= CanonBoatATT;
             statsManager.UpdateText();
         }
 
+        yield return new WaitForSeconds(0.5f); // attendre fin animation
+
         Debug.Log("le canon ou bateau a été attaqué");
+
+        animator.SetBool("attack", false);
     }
 
-    public void AllAttack()
+
+    public IEnumerator AllAttack()
     {
         int tempATT;
         var chance = Random.Range(1, 100);
@@ -130,12 +152,38 @@ public class Enemy : MonoBehaviour
         else
             tempATT = 20;
 
+        if (animator == null)
+        {
+            Debug.LogError("Animator est null !");
+            yield break;
+        }
+
+        animator.SetBool("Attack", true);
+
+        yield return new WaitForSeconds(0.5f); // temps avant impact
+
+        if (allPlayers == null)
+        {
+            Debug.LogError("allPlayers est null !");
+            yield break;
+        }
+
         foreach (var p in allPlayers)
         {
-            p.HP -= tempATT; 
+            if (p == null)
+            {
+                Debug.LogError("Un joueur dans allPlayers est null !");
+                continue;
+            }
+
+            p.HP -= tempATT;
         }
 
         Debug.Log("un monstre a attaqué tous les joueurs");
+
+        yield return new WaitForSeconds(2.5f); // attendre fin animation
+
+        animator.SetBool("Attack", false);
     }
 
     public void Heal()
