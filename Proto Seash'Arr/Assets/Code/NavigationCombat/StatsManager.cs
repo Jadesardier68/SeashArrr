@@ -191,7 +191,7 @@ public class StatsManager : MonoBehaviour
                 SfxDelay = false;
                 Navigation = false;
                 Fight = true;
-                CameraNavigation.SetActive(false);
+               // CameraNavigation.SetActive(false);
                 CameraFight.SetActive(true);
                 CanonVieFight.SetActive(true);
                 canonHealthGO.SetActive(false);
@@ -247,7 +247,6 @@ public class StatsManager : MonoBehaviour
                 battleHandler.isBattleOver = false;
                 CameraFight.SetActive(false);
                 CanonVieFight.SetActive(false);
-                CameraNavigation.SetActive(true);
                 sliderNavigation.SetActive(true);
             }
 

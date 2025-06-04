@@ -8,20 +8,20 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Panels")]
+    [Header("Panneaux UI")]
     public GameObject actionPanel;
     public GameObject targetPanel;
 
-    [Header("Target Buttons")]
+    [Header("Boutons de cible")]
     public Button[] targetButtons;
 
-    [Header("Input System Actions")]
+    [Header("Input Actions")]
     public InputAction attackInput;
     public InputAction healInput;
     public InputAction canonInput;
     public InputAction fixBoatInput;
 
-    [Header("References")]
+    [Header("Références")]
     public StatsManager statsManager;
     public Battle_Handler battleHandler;
 
@@ -34,9 +34,10 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        // Assigner les références dynamiquement si besoin
+        // Initialisation dynamique si nécessaire
         if (statsManager == null)
             statsManager = FindObjectOfType<StatsManager>();
+
         if (battleHandler == null)
             battleHandler = FindObjectOfType<Battle_Handler>();
     }
@@ -58,10 +59,10 @@ public class UIManager : MonoBehaviour
         canonInput.Enable();
         fixBoatInput.Enable();
 
-        attackInput.performed += ctx => SelectAction(0); // Attack
-        healInput.performed += ctx => SelectAction(1);   // Heal
+        attackInput.performed += ctx => SelectAction(0); // Attaque
+        healInput.performed += ctx => SelectAction(1);   // Soin
         canonInput.performed += ctx => SelectAction(2);  // Canon
-        fixBoatInput.performed += ctx => SelectAction(3); // Fix
+        fixBoatInput.performed += ctx => SelectAction(3); // Réparer
     }
 
     private void DisableInputs()
@@ -82,7 +83,6 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator StartPlayerTurn(Player player, Action<int, int> onTurnComplete)
     {
-        Debug.Log("tkt je me lance");
         currentPlayer = player;
         selectedAction = -1;
         selectedTarget = -1;
@@ -90,15 +90,13 @@ public class UIManager : MonoBehaviour
         targetSelected = false;
 
         actionPanel.SetActive(true);
-        Debug.Log("j'ai affiché le panel");
         targetPanel.SetActive(false);
 
         yield return new WaitUntil(() => actionSelected);
-
         actionPanel.SetActive(false);
 
-        // Si l’action nécessite un ciblage
-        if (selectedAction == 0 || selectedAction == 1) // Attack or Heal
+        // Actions nécessitant un ciblage
+        if (selectedAction == 0 || selectedAction == 1) // Attaque ou Soin
         {
             yield return StartCoroutine(HandleTargetSelection());
         }
@@ -118,56 +116,76 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator HandleTargetSelection()
     {
-        Debug.Log("allez go à moi");
         List<GameObject> targets = selectedAction == 1 ? battleHandler.Players : battleHandler.Ennemies;
 
         targetSelected = false;
         selectedTarget = -1;
 
-        // Afficher les bons boutons
+        string[] fixedEnemyNames = { "Blobfish", "Méduse", "Calamar" };
+
         for (int i = 0; i < targetButtons.Length; i++)
         {
-            if (i < targets.Count)
+            Button btn = targetButtons[i];
+
+            if (selectedAction == 1) // Heal (sur les joueurs)
             {
-                int index = i;
-                GameObject target = targets[i];
-                Button btn = targetButtons[i];
-
-                if (btn == null)
+                if (i < battleHandler.Players.Count && btn != null && battleHandler.Players[i] != null)
                 {
-                    Debug.LogError($"Le bouton à l’index {i} est null.");
-                    continue;
-                }
+                    GameObject target = battleHandler.Players[i];
+                    TMP_Text label = btn.GetComponentInChildren<TMP_Text>();
+                    if (label != null)
+                        label.text = GetPortraitName(target);
 
-                if (target == null)
+                    btn.gameObject.SetActive(true);
+                    int index = i;
+                    btn.onClick.RemoveAllListeners();
+                    btn.onClick.AddListener(() => OnTargetSelected(index));
+                }
+                else
                 {
-                    Debug.LogError($"La cible à l’index {i} est null.");
-                    continue;
+                    if (btn != null) btn.gameObject.SetActive(false);
                 }
-
-                TMP_Text textComponent = btn.GetComponentInChildren<TMP_Text>();
-                if (textComponent == null)
+            }
+            else if (selectedAction == 0) // Attack (sur ennemis)
+            {
+                if (i < fixedEnemyNames.Length && btn != null)
                 {
-                    Debug.LogError($"Le bouton à l’index {i} n’a pas de composant Text.");
-                    continue;
-                }
+                    string requiredName = fixedEnemyNames[i];
+                    GameObject enemy = battleHandler.Ennemies.Find(e =>
+                    {
+                        Enemy comp = e.GetComponent<Enemy>();
+                        return comp != null && comp.portraitSpriteName == requiredName;
+                    });
 
-                btn.gameObject.SetActive(true);
-                textComponent.text = target.name;
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => OnTargetSelected(index));
+                    if (enemy != null)
+                    {
+                        TMP_Text label = btn.GetComponentInChildren<TMP_Text>();
+                        if (label != null)
+                            label.text = requiredName;
+
+                        btn.gameObject.SetActive(true);
+                        int index = battleHandler.Ennemies.IndexOf(enemy);
+                        btn.onClick.RemoveAllListeners();
+                        btn.onClick.AddListener(() => OnTargetSelected(index));
+                    }
+                    else
+                    {
+                        btn.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (btn != null) btn.gameObject.SetActive(false);
+                }
             }
             else
             {
-                if (targetButtons[i] != null)
-                    targetButtons[i].gameObject.SetActive(false);
+                if (btn != null) btn.gameObject.SetActive(false);
             }
         }
 
         targetPanel.SetActive(true);
-
         yield return new WaitUntil(() => targetSelected);
-
         targetPanel.SetActive(false);
     }
 
@@ -176,5 +194,24 @@ public class UIManager : MonoBehaviour
         selectedTarget = index;
         targetSelected = true;
         Debug.Log($"Cible sélectionnée : {index}");
+    }
+
+    /// <summary>
+    /// Retourne le nom d'affichage du portrait selon le type d'unité.
+    /// </summary>
+    private string GetPortraitName(GameObject unit)
+    {
+        if (unit.CompareTag("Player"))
+        {
+            Player p = unit.GetComponent<Player>();
+            return p != null ? p.portraitSpriteName : "???";
+        }
+        else if (unit.CompareTag("Enemy"))
+        {
+            Enemy e = unit.GetComponent<Enemy>();
+            return e != null ? e.portraitSpriteName : "???";
+        }
+
+        return "???";
     }
 }

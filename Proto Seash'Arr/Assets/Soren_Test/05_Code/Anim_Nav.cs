@@ -105,7 +105,7 @@ public class Anim_Nav : MonoBehaviour
     {
         if (RandomFight.Fight == true)
         {
-            animator.SetBool("Attaquer", true);
+            animator.SetBool("Shoot", true);
         }
     }
 
@@ -117,7 +117,7 @@ public class Anim_Nav : MonoBehaviour
         }
     }
     
-    private void Reparer()
+    public void Reparer()
     {
         if (RandomFight.Fight == true)
         {
