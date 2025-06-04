@@ -229,11 +229,13 @@ public class Battle_Handler : MonoBehaviour
                     playVFX.PlaySmokeCanon();
                     playVFX.PlayMecheCanon();
                 }
-                foreach (var e in Ennemies)
+                for (int i = Ennemies.Count - 1; i >= 0; i--)
                 {
-                    Enemy enemy = e.GetComponent<Enemy>();
-                    enemy.SetHP(enemy.GetHP() - player.CanonPower);
-                    
+                    if (Ennemies[i] != null)
+                    {
+                        Enemy enemy = Ennemies[i].GetComponent<Enemy>();
+                        enemy.SetHP(enemy.GetHP() - player.CanonPower);
+                    }
                 }
                 break;
 
