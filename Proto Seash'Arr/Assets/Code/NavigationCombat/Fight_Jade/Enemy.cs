@@ -184,7 +184,11 @@ public class Enemy : MonoBehaviour
                 continue;
             }
 
-            p.HP -= tempATT;
+            Player playerComponent = p.GetComponent<Player>();
+            if (playerComponent != null)
+            {
+                playerComponent.TakeDamage(tempATT);
+            }
         }
 
         Debug.Log("un monstre a attaqué tous les joueurs");

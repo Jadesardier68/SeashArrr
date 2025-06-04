@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] public UIManager UIManager;
     [SerializeField] public StatsManager statsManager;
     public Battle_Handler battleHandler;
-    
+    public int playerIndex; // Index du joueur dans battleHandler.Players
 
     public bool isBoosted;
     public Role role;
@@ -136,7 +136,8 @@ public class Player : MonoBehaviour
 
     public void SetHP(int newHP)
     {
-        HP = newHP;
+        HP = Mathf.Clamp(newHP, 0, HPMax);
+        UIManager.UpdateHealthSlider(playerIndex, HP);
     }
 
     public int GetHPMax()
@@ -147,6 +148,20 @@ public class Player : MonoBehaviour
     public int GetRoleIndex()
     {
         return roleIndex;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        HP -= damage;
+        HP = Mathf.Max(HP, 0);
+
+        // Met à jour le slider de vie via UIManager
+        if (UIManager != null)
+        {
+            UIManager.UpdateHealthSlider(playerIndex, HP);
+        }
+
+        Debug.Log($"[Player {playerIndex}] Dégâts subis : {damage} | PV restants : {HP}");
     }
 
     // Update is called once per frame

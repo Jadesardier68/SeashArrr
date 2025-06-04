@@ -32,6 +32,9 @@ public class UIManager : MonoBehaviour
     private bool actionSelected = false;
     private bool targetSelected = false;
 
+    [Header("Sliders de Vie")]
+    public Slider[] healthSliders;
+
     private void Awake()
     {
         // Initialisation dynamique si nécessaire
@@ -71,6 +74,32 @@ public class UIManager : MonoBehaviour
         healInput.Disable();
         canonInput.Disable();
         fixBoatInput.Disable();
+    }
+
+    public void InitializeHealthSliders()
+    {
+        for (int i = 0; i < healthSliders.Length; i++)
+        {
+            if (i < battleHandler.Players.Count && healthSliders[i] != null)
+            {
+                Player player = battleHandler.Players[i].GetComponent<Player>();
+                healthSliders[i].gameObject.SetActive(true);
+                healthSliders[i].maxValue = player.HPMax;
+                healthSliders[i].value = player.HP;
+            }
+            else if (healthSliders[i] != null)
+            {
+                healthSliders[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void UpdateHealthSlider(int playerIndex, int currentHP)
+    {
+        if (playerIndex >= 0 && playerIndex < healthSliders.Length && healthSliders[playerIndex] != null)
+        {
+            healthSliders[playerIndex].value = currentHP;
+        }
     }
 
     private bool CanPlayerAct()
@@ -214,4 +243,7 @@ public class UIManager : MonoBehaviour
 
         return "???";
     }
+
+
 }
+

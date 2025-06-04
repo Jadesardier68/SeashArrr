@@ -52,6 +52,7 @@ public class Battle_Handler : MonoBehaviour
         GenerateEnemies();
         BuildTurnOrder();
         StartCoroutine(BattleLoop());
+        UIManager.InitializeHealthSliders();
 
         for (int i = 0; i < Players.Count && i < playerPlaceholders.Count; i++)
         {
@@ -96,6 +97,14 @@ public class Battle_Handler : MonoBehaviour
     {
         turnOrder.Clear();
         turnOrder.AddRange(Players);
+        for (int i = 0; i < Players.Count; i++)
+        {
+            Player playerComp = Players[i].GetComponent<Player>();
+            if (playerComp != null)
+            {
+                playerComp.playerIndex = i;
+            }
+        }
         turnOrder.AddRange(Ennemies);
         ShuffleList(turnOrder);
     }
@@ -204,8 +213,12 @@ public class Battle_Handler : MonoBehaviour
                     animNav.Soigner();
                     statsManager.nbrRagout--;
                     statsManager.UpdateText();
+
                     Player target = Players[targetIndex].GetComponent<Player>();
                     target.SetHP(target.GetHP() + target.HealPower);
+
+                    // 🔧 AJOUTE CECI POUR METTRE À JOUR LE SLIDER
+                    UIManager.UpdateHealthSlider(target.playerIndex, target.HP);
                 }
                 break;
 
