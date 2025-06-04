@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class Battle_Handler : MonoBehaviour
 {
+    public PlayVFX playVFX;
+
     [HideInInspector] public List<GameObject> Players = new List<GameObject>();
     [HideInInspector] public List<GameObject> Ennemies = new List<GameObject>();
     [HideInInspector] public List<GameObject> turnOrder = new List<GameObject>();
@@ -208,10 +211,16 @@ public class Battle_Handler : MonoBehaviour
 
             case 2: // Canon
                 animNav.Reparer();
+                if (playVFX != null)
+                {
+                    playVFX.PlaySmokeCanon();
+                    playVFX.PlayMecheCanon();
+                }
                 foreach (var e in Ennemies)
                 {
                     Enemy enemy = e.GetComponent<Enemy>();
                     enemy.SetHP(enemy.GetHP() - player.CanonPower);
+                    
                 }
                 break;
 

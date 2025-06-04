@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.28513554, g: 0.80662644, b: 0.99858886, a: 1}
+  m_IndirectSpecularColor: {r: 0.28574878, g: 0.8067274, b: 0.99861616, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3323,64 +3323,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1894482842}
   m_SourcePrefab: {fileID: 100100000, guid: 9b96dc553e03d08498a559c2b9986aef, type: 3}
---- !u!1 &398298013
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 398298015}
-  - component: {fileID: 398298014}
-  m_Layer: 0
-  m_Name: VFXManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &398298014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398298013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 458c6b56f95be3645968d78fd014a8e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ReparationFuite1: {fileID: 0}
-  ReparationFuite2: {fileID: 0}
-  ReparationFuite3: {fileID: 0}
-  ExplosionEnnemie1: {fileID: 1873366046}
-  ExplosionEnnemie2: {fileID: 1790826041}
-  ExplosionEnnemie3: {fileID: 705339216}
-  SoinJoueur1: {fileID: 0}
-  SoinJoueur2: {fileID: 0}
-  SoinJoueur3: {fileID: 0}
-  SoinEnnemie1: {fileID: 0}
-  SoinEnnemie2: {fileID: 0}
-  SoinEnnemie3: {fileID: 0}
-  SmokeCanon: {fileID: 1738169799}
-  MecheCanon: {fileID: 0}
---- !u!4 &398298015
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398298013}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 504.10037, y: 76.32359, z: -1015.3028}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &404352848
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,11 +5786,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674087647}
   m_CullTransparentMesh: 1
---- !u!198 &705339216 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7747749837214518225, guid: 9074470a5c515804ca7df3ce23bdab52, type: 3}
-  m_PrefabInstance: {fileID: 2140232227}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &705363259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12037,7 +11974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1f1d35939c5b64891b6ecfa50e1630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playVFX: {fileID: 398298014}
   Players: []
   Ennemies: []
   turnOrder: []
@@ -14840,11 +14776,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.03042395, y: 0.9999998, z: 1}
   m_Center: {x: -0.033874042, y: 0.0000000148252735, z: -0.0000000019703874}
---- !u!198 &1790826041 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7747749837214518225, guid: 9074470a5c515804ca7df3ce23bdab52, type: 3}
-  m_PrefabInstance: {fileID: 1701838689}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1856878350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14952,11 +14883,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.005455493, y: 0.0054554935, z: 0.006542772}
   m_Center: {x: -8.465807e-12, y: 6.641994e-11, z: -0.0028585496}
---- !u!198 &1873366046 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7747749837214518225, guid: 9074470a5c515804ca7df3ce23bdab52, type: 3}
-  m_PrefabInstance: {fileID: 1265807371}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1877507337
 GameObject:
   m_ObjectHideFlags: 0
@@ -16228,7 +16154,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2c33558c2839e31499cbc019c966a4d5, type: 2}
     - target: {fileID: 5245125516106416151, guid: ffa4fac5639686441ac811b8a5746b5c, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5245125516106416151, guid: ffa4fac5639686441ac811b8a5746b5c, type: 3}
       propertyPath: lengthInSec
@@ -18044,4 +17970,3 @@ SceneRoots:
   - {fileID: 1265807371}
   - {fileID: 1701838689}
   - {fileID: 2140232227}
-  - {fileID: 398298015}

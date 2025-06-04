@@ -26,6 +26,7 @@ public class PlayVFX : MonoBehaviour
 
     [Header("Effets divers")]
     public VisualEffect SmokeCanon;
+    public ParticleSystem MecheCanon;
 
     void Start()
     {
@@ -78,6 +79,7 @@ public class PlayVFX : MonoBehaviour
     public void PlaySoinEnnemie3() => PlayVFXEffect(SoinEnnemie3);
 
     public void PlaySmokeCanon() => PlayVFXEffect(SmokeCanon);
+    public void PlayMecheCanon() => PlayParticle(MecheCanon);   
 
     // Méthodes utilitaires pour lancer les effets
     private void PlayParticle(ParticleSystem ps)
