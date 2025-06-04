@@ -207,7 +207,7 @@ public class Battle_Handler : MonoBehaviour
                 break;
 
             case 2: // Canon
-                animNav.Canon();
+                animNav.Reparer();
                 foreach (var e in Ennemies)
                 {
                     Enemy enemy = e.GetComponent<Enemy>();

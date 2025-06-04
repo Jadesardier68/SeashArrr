@@ -103,28 +103,28 @@ public class Anim_Nav : MonoBehaviour
 
     public void Attaquer()
     {
-        if (RandomFight.Fight == true)
-        {
-            animator.SetBool("Shoot", true);
-        }
+        animator.SetBool("Shoot", true);
+        StartCoroutine(ResetBool("Shoot", 1f));
     }
 
     public void Soigner()
     {
-        if (RandomFight.Fight == true)
-        {
-            animator.SetBool("Heal", true);
-        }
+        animator.SetBool("Heal", true);
+        StartCoroutine(ResetBool("Heal", 1f));
     }
-    
+
     public void Reparer()
     {
-        if (RandomFight.Fight == true)
-        {
-            animator.SetBool("Cooking", true);
-        }
+        animator.SetBool("Cooking", true);
+        StartCoroutine(ResetBool("Cooking", 1f));
     }
-    
+
+    private IEnumerator ResetBool(string param, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        animator.SetBool(param, false);
+    }
+
     public void OnTriggerEnter(Collider other)
     {
             if (other.CompareTag("Cuisine"))
