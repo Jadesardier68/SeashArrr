@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         //Cannonier
     }
 
-    private static int roleIndex = 0;
+    public static int roleIndex = 0;
 
     [SerializeField] public int HPMax;
     [SerializeField] public int ATT;
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public Role role;
     public GameObject CaptainPrefab;
     public GameObject DoctorPrefab;
+    public GameObject FighterPrefab;
     public string portraitSpriteName;
 
     public int HP;
@@ -103,28 +104,44 @@ public class Player : MonoBehaviour
         roleIndex = (roleIndex + 1) % Enum.GetValues(typeof(Role)).Length;
     }
 
-        
+
     public void ChangePrefab()
     {
-        if (roleIndex == 1) //Captain
-            {
-            CaptainPrefab.SetActive(true);
-            ATT = 25;
-            CanonPower = 10;
-            HealPower = 50;
-            BoostPower = 0.5f;
-            FixPower = 100;
-            portraitSpriteName = "Capitaine";
-            }
-        if (roleIndex == 2) // Doctor
+        switch (role)
         {
-            DoctorPrefab.SetActive(true);
-            ATT = 25;
-            CanonPower = 10;
-            HealPower = 100;
-            BoostPower = 0f;
-            FixPower = 100;
-            portraitSpriteName = "Médecin";
+            case Role.Captain:
+                CaptainPrefab.SetActive(true);
+                ATT = 25;
+                CanonPower = 10;
+                HealPower = 50;
+                BoostPower = 0.5f;
+                FixPower = 100;
+                portraitSpriteName = "Capitaine";
+                break;
+
+            case Role.Doctor:
+                DoctorPrefab.SetActive(true);
+                ATT = 25;
+                CanonPower = 10;
+                HealPower = 100;
+                BoostPower = 0f;
+                FixPower = 100;
+                portraitSpriteName = "Médecin";
+                break;
+
+            case Role.Fighter:
+                FighterPrefab.SetActive(true);
+                ATT = 50;
+                CanonPower = 10;
+                HealPower = 50;
+                BoostPower = 0f;
+                FixPower = 100;
+                portraitSpriteName = "Combattant";
+                break;
+
+            default:
+                Debug.LogWarning("Rôle non reconnu dans ChangePrefab.");
+                break;
         }
     }
 
