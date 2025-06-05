@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Player;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Enemy : MonoBehaviour
     public bool isBoosted;
     public Type type;
     public string portraitSpriteName;
-
+    public Slider healthSlider;
 
     private Player player;
     public List<Player> allPlayers;
@@ -54,9 +55,14 @@ public class Enemy : MonoBehaviour
 
             // HP de départ
         HP = HPMax;
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = HPMax;
+            healthSlider.value = HP;
+        }
 
-            // (Ton switch type ici si tu veux faire un comportement selon le type)
-  
+        // (Ton switch type ici si tu veux faire un comportement selon le type)
+
         switch (type)
         {
             case Type.Fighter:
@@ -81,11 +87,13 @@ public class Enemy : MonoBehaviour
 
     public void SetHP(int value)
     {
-        HP = Mathf.Clamp(value, 0, HPMax); // pour éviter des HP négatifs ou > max
+        HP = Mathf.Clamp(value, 0, HPMax);
+
+        if (healthSlider != null)
+            healthSlider.value = HP;
+
         if (HP <= 0)
-        {
-            Die(); // si tu veux gérer la mort ici
-        }
+            Die();
     }
 
     private void Die()
