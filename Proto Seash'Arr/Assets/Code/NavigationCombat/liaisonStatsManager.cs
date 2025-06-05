@@ -81,7 +81,7 @@ public class liaisonStatsManager : MonoBehaviour
         {
             animationPlayer.tableIngenieurActive = true;
             animationPlayer.Ingenieur();
-            useAtelier.AmeliorationBateau();
+            useAtelier.AmeliorationBateau(atelierManager); // ✅ paramètre ajouté
             animationPlayer.StopMoving();
         }
     }
@@ -92,7 +92,7 @@ public class liaisonStatsManager : MonoBehaviour
         {
             animationPlayer.tableIngenieurActive = true;
             animationPlayer.Ingenieur();
-            useAtelier.AmeliorationCanon();
+            useAtelier.AmeliorationCanon(atelierManager); // ✅
             animationPlayer.StopMoving();
         }
     }
@@ -103,7 +103,7 @@ public class liaisonStatsManager : MonoBehaviour
         {
             animationPlayer.piqueNiqueActive = true;
             animationPlayer.Manger();
-            useAtelier.Manger();
+            useAtelier.Manger(atelierManager); // ✅
             animationPlayer.StopMoving();
         }
     }
@@ -114,7 +114,7 @@ public class liaisonStatsManager : MonoBehaviour
         {
             animationPlayer.canonActive = true;
             animationPlayer.Canon();
-            useAtelier.ReparerCanon();
+            useAtelier.ReparerCanon(atelierManager); // ✅
             animationPlayer.StopMoving();
         }
     }
@@ -125,7 +125,7 @@ public class liaisonStatsManager : MonoBehaviour
         {
             animationPlayer.cuisineActive = true;
             animationPlayer.Cuisiner();
-            useAtelier.CuisinerRagout();
+            useAtelier.CuisinerRagout(atelierManager); // ✅
             animationPlayer.StopMoving();
         }
     }
@@ -136,7 +136,7 @@ public class liaisonStatsManager : MonoBehaviour
         {
             animationPlayer.cuisineActive = true;
             animationPlayer.Cuisiner();
-            useAtelier.CuisinerRhum();
+            useAtelier.CuisinerRhum(atelierManager); // ✅
             animationPlayer.StopMoving();
         }
     }

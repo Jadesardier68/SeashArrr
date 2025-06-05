@@ -278,4 +278,17 @@ public class AtelierManager : MonoBehaviour
         };
     }
 
+    public Slider GetSliderForTypeByPanel()
+    {
+        if (PanelCuisine.activeSelf && CuisineSlider != null)
+            return CuisineSlider;
+        else if (PanelTableIngenieur.activeSelf && IngeniorSlider != null)
+            return IngeniorSlider;
+        else if (PanelCanon.activeSelf && CanonSlider != null)
+            return CanonSlider;
+        else if (PanelPiqueNique.activeSelf && PiqueNiqueSlider != null)
+            return PiqueNiqueSlider;
+
+        return null;
+    }
 }

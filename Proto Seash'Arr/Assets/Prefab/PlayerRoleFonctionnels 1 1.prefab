@@ -178,7 +178,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4ec5c7d6348fc67408b5237b78881cd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a0632b79c8481345af3cda85b086850, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4299,7 +4299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4ec5c7d6348fc67408b5237b78881cd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a0632b79c8481345af3cda85b086850, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13868,7 +13868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4ec5c7d6348fc67408b5237b78881cd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a0632b79c8481345af3cda85b086850, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16329,7 +16329,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1641610511021706224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20857,8 +20857,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 7252b3b6-d6ed-4294-a1bc-0cea2bf7321d
-      m_Path: <XInputController>/buttonWest
+      m_Id: a2885be7-09b0-4579-9b8e-b55ad70377a4
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -20875,7 +20875,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 349cf7da-8c1e-4452-9223-e7c10eecf495
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -20892,7 +20892,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 622faf1a-b521-4a64-8cef-9fb3927217f0
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -20909,7 +20909,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: de8e53db-67de-46cd-8ec3-43dd03370ee5
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -20926,7 +20926,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 3feeeee7-3155-4506-8dc5-f5446f131df6
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21234,7 +21234,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 7252b3b6-d6ed-4294-a1bc-0cea2bf7321d
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21251,7 +21251,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 349cf7da-8c1e-4452-9223-e7c10eecf495
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21268,7 +21268,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 622faf1a-b521-4a64-8cef-9fb3927217f0
-      m_Path: <XInputController>/buttonWest
+      m_Path: <NimbusGamepadHid>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21285,7 +21285,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: de8e53db-67de-46cd-8ec3-43dd03370ee5
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21302,7 +21302,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 3feeeee7-3155-4506-8dc5-f5446f131df6
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21548,8 +21548,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 7252b3b6-d6ed-4294-a1bc-0cea2bf7321d
-      m_Path: <XInputController>/buttonWest
+      m_Id: a2885be7-09b0-4579-9b8e-b55ad70377a4
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21566,7 +21566,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 349cf7da-8c1e-4452-9223-e7c10eecf495
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21583,7 +21583,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 622faf1a-b521-4a64-8cef-9fb3927217f0
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21600,7 +21600,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: de8e53db-67de-46cd-8ec3-43dd03370ee5
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -21617,7 +21617,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 3feeeee7-3155-4506-8dc5-f5446f131df6
-      m_Path: <XInputController>/buttonWest
+      m_Path: <XInputController>/buttonNorth
       m_Interactions: 
       m_Processors: 
       m_Groups: 
