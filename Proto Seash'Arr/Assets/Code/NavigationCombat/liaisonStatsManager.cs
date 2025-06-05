@@ -13,6 +13,7 @@ public class liaisonStatsManager : MonoBehaviour
     public InputAction CuisinerRhum;
     public InputAction Manger;
     public InputAction RepCanon;
+    public InputAction RepBateau;
     public InputAction AmeBateau;
     public InputAction AmeCanon;
 
@@ -49,11 +50,13 @@ public class liaisonStatsManager : MonoBehaviour
         RepCanon.Enable();
         AmeBateau.Enable();
         AmeCanon.Enable();
+        RepBateau.Enable();
 
         CuisinerRagout.started += TriggerUseAtelierCuisineRagout;
         CuisinerRhum.started += TriggerUseAtelierCuisinerRhum;
         Manger.started += TriggerUseAtelierManger;
         RepCanon.started += TriggerUseAtelierRepCanon;
+        RepBateau.started += TriggerUseAtelierRepBateau;
         AmeBateau.started += TriggerUseAtelierAmeBateau;
         AmeCanon.started += TriggerUseAtelierAmeCanon;
     }
@@ -64,6 +67,7 @@ public class liaisonStatsManager : MonoBehaviour
         CuisinerRhum.started -= TriggerUseAtelierCuisinerRhum;
         Manger.started -= TriggerUseAtelierManger;
         RepCanon.started -= TriggerUseAtelierRepCanon;
+        RepBateau.started -= TriggerUseAtelierRepBateau;
         AmeBateau.started -= TriggerUseAtelierAmeBateau;
         AmeCanon.started -= TriggerUseAtelierAmeCanon;
 
@@ -71,6 +75,7 @@ public class liaisonStatsManager : MonoBehaviour
         CuisinerRhum.Disable();
         Manger.Disable();
         RepCanon.Disable();
+        RepBateau.Disable();
         AmeBateau.Disable();
         AmeCanon.Disable();
     }
@@ -115,6 +120,17 @@ public class liaisonStatsManager : MonoBehaviour
             animationPlayer.canonActive = true;
             animationPlayer.Canon();
             useAtelier.ReparerCanon(atelierManager); // ✅
+            animationPlayer.StopMoving();
+        }
+    }
+
+    public void TriggerUseAtelierRepBateau(InputAction.CallbackContext context)
+    {
+        if (atelierManager.PanelCanon.activeSelf && useAtelier != null)
+        {
+            animationPlayer.canonActive = true;
+            animationPlayer.Canon();
+            useAtelier.ReparerBateau(atelierManager); // ✅
             animationPlayer.StopMoving();
         }
     }

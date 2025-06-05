@@ -245,6 +245,7 @@ public class UseAtelier : MonoBehaviour
             {
                 StatsManager.nbrRagout -= 1;
                 StatsManager.UpdateText();
+                
             }
         },
         null, atelier);
